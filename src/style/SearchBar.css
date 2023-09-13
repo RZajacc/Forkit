@@ -1,18 +1,11 @@
 #search-container {
     background-color: #6dff96;
-}
-
-.form-label {
-    justify-content: center;
+    
 }
 
 #search-boxes-container{
-    height: 100px;
+    height: 150px;
     align-items: center;
 }
 
-.select {
-    height: 20px;
-    overflow-y: auto;
-}
 

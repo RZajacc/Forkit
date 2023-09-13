@@ -35,10 +35,10 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
   return (
     <Container fluid id="search-container">
       <Row className="justify-content-md-center">
-        <Col xs={8}>
-          <Row className="justify-content-md-center" id="search-boxes-container">
-            <Col xs={2}>
-               <InputGroup className="mb-3">
+        <Col xs={10}>
+          <Row className="justify-content-md-center" id="search-boxes-container" xs={2} lg={4}>
+            <Col >
+               <InputGroup>
                 <InputGroup.Text id="search-val">&#128269;</InputGroup.Text>
                 <Form.Control
                   placeholder="Type here..."
@@ -48,7 +48,7 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
               </InputGroup>
             </Col>
 
-            <Col xs={2}>
+            <Col >
                <Form.Select aria-label="dish-type-select" onChange={handleDishType}>
                 <option value={'all'}>Select dish type</option>
                 {availableDishTypes.map((type, idx) => {
@@ -57,7 +57,7 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
               </Form.Select>
             </Col>
 
-            <Col xs={2}>
+            <Col >
                <Form.Select aria-label="cousine-select" id="select-box" onChange={handleCuisineType}>
                 <option value={'all'}>Choose cuisine</option>
                 {availableCuisines.map((cousine, idx) => {
@@ -66,7 +66,7 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
               </Form.Select>
             </Col>
 
-            <Col xs={2}>
+            <Col >
                <Form.Select aria-label="diet-type-select" onChange={handleDietType}>
                 <option value={'all'}>Diet type</option>
                 {availableDietTypes.map((type, idx) => {
