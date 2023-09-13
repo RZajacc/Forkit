@@ -1,9 +1,16 @@
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap"
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 import "../style/SearchBar.css"
 
-function SearchBar({setSearchVal, setDishType, setCuisine, setDietType}) {
+interface Props {
+  setSearchVal: (searchVal:string) => void,
+  setDishType: (dishType:string) => void,
+  setCuisine: (cuisine:string) => void,
+  setDietType: (dietType:string) => void,
+}
+
+function SearchBar({setSearchVal, setDishType, setCuisine, setDietType} : Props) {
 
   
   // * Values to prefill select boxes
@@ -18,10 +25,10 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType}) {
   const availableDietTypes = ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian', 'Ovo-Vegetarian',
     'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'Low FODMAP', 'Whole30']
   
-  const [tempSearchVal, setTempSearchVal] = useState('')
+  const [tempSearchVal, setTempSearchVal] = useState<string>('')
   
 
-  const handleSearchValue = (e) => {
+  const handleSearchValue = (e : ChangeEvent<HTMLInputElement>) => {
     setTempSearchVal(e.target.value);
   }
 
@@ -29,19 +36,17 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType}) {
     setSearchVal(tempSearchVal)
   }
 
-  const handleDishType = (e) => {
+  const handleDishType = (e : ChangeEvent<HTMLSelectElement>) => {
     setDishType(e.target.value);
   }
 
-   const handleCuisineType = (e) => {
+   const handleCuisineType = (e : ChangeEvent<HTMLSelectElement>) => {
      setCuisine(e.target.value);    
   }
 
-  const handleDietType = (e) => {
+  const handleDietType = (e : ChangeEvent<HTMLSelectElement>) => {
     setDietType(e.target.value);
   }
-
-  // console.log(tempSearchVal);
 
   return (
     <Container fluid id="search-container">
