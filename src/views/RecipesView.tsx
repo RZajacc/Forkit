@@ -14,13 +14,12 @@ function RecipesView() {
   const [cuisine, setCuisine] = useState<string>('')
   const [dietType, setDietType] = useState<string>('')
 
-  console.log(searchVal, dishType, cuisine, dietType)
   
     return (
     <>
         <AppNav />
         <SearchBar setSearchVal={setSearchVal} setDishType={setDishType} setCuisine={setCuisine} setDietType={setDietType} />
-        <RecipesList />
+        <RecipesList searchVal={searchVal} dishType={dishType} cuisine={cuisine} dietType={dietType} />
         <Footer/>
     </>
   )

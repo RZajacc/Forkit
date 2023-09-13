@@ -1,8 +1,5 @@
-import React from 'react'
 
-type Props = {}
-
-function RecipeDetails({}: Props) {
+function RecipeDetails() {
   return (
     <div>RecipeDetails</div>
   )

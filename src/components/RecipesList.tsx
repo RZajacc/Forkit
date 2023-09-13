@@ -6,9 +6,15 @@ interface RecipeGeneral {
   image: string
 }
 
+interface Props {
+  searchVal: string,
+  dishType: string,
+  cuisine: string,
+  dietType: string,
+}
 
-function RecipesList() {
-
+function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
+  
   // * ------------ DEFINE USESTATES -------------------------------
   const [recipesData, setRecipesData] = useState<RecipeGeneral[]>([
     {
@@ -20,10 +26,12 @@ function RecipesList() {
   const [totalResults, setTotalResults] = useState<number | null>(null)
   const [offset, setOffset] = useState<number | null>(null)
 
-  
-  const fetchRecipesList = async () => {
 
-    const url = `https://api.spoonacular.com/recipes/complexSearch?apiKey=72af2c7b661040b7a5f1bc928fa61a0e&diet=vegan`;
+  const fetchRecipesList = async () => {
+    const baseUrl = 'https://api.spoonacular.com/recipes/';
+    const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
+    const page = '10';
+    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&page=${page}}`;
 
     try {
       // * ----- FETCH ----------------
@@ -44,7 +52,7 @@ function RecipesList() {
    
   useEffect(() => {
      fetchRecipesList()   
-  }, [])
+  }, [searchVal, dishType, cuisine, dietType])
   
 
   
