@@ -1,8 +1,9 @@
-import { Container, Row, Col, InputGroup, Form} from "react-bootstrap"
+import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap"
+import { useState } from "react";
 
 import "../style/SearchBar.css"
 
-function SearchBar({setDishType, setCuisine, setDietType}) {
+function SearchBar({setSearchVal, setDishType, setCuisine, setDietType}) {
 
   
   // * Values to prefill select boxes
@@ -17,7 +18,16 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
   const availableDietTypes = ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian', 'Ovo-Vegetarian',
     'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'Low FODMAP', 'Whole30']
   
+  const [tempSearchVal, setTempSearchVal] = useState('')
   
+
+  const handleSearchValue = (e) => {
+    setTempSearchVal(e.target.value);
+  }
+
+  const handleSearchButtonClick = () => {
+    setSearchVal(tempSearchVal)
+  }
 
   const handleDishType = (e) => {
     setDishType(e.target.value);
@@ -31,6 +41,7 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
     setDietType(e.target.value);
   }
 
+  // console.log(tempSearchVal);
 
   return (
     <Container fluid id="search-container">
@@ -44,7 +55,11 @@ function SearchBar({setDishType, setCuisine, setDietType}) {
                   placeholder="Type here..."
                   aria-label="search-val"
                   aria-describedby="search-val"
+                  onChange={handleSearchValue}
                 />
+                  <Button variant="warning" id="button-addon1" onClick={handleSearchButtonClick}>
+                    Search
+                  </Button>
               </InputGroup>
             </Col>
 

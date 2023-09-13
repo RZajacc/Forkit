@@ -9,14 +9,17 @@ import Footer from '../components/Footer'
 function RecipesView() {
   
   // * Values use states
+  const [searchVal, setSearchVal] = useState('')
   const [dishType, setDishType] = useState('')
   const [cuisine, setCuisine] = useState('')
   const [dietType, setDietType] = useState('')
+
+  console.log(searchVal, dishType, cuisine, dietType)
   
     return (
     <>
         <AppNav />
-        <SearchBar setDishType={setDishType} setCuisine={setCuisine} setDietType={setDietType} />
+        <SearchBar setSearchVal={setSearchVal} setDishType={setDishType} setCuisine={setCuisine} setDietType={setDietType} />
         <RecipesList />
         <Footer/>
     </>
