@@ -1,4 +1,4 @@
-import Recipes from "./views/Recipes"
+import RecipesView from "./views/RecipesView"
 
 
 
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Recipes/>
+      <RecipesView/>
     </>
   )
 }

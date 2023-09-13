@@ -6,7 +6,7 @@ import Footer from '../components/Footer'
 
 
 
-function Recipes() {
+function RecipesView() {
   
   // * Values use states
   const [dishType, setDishType] = useState('')
@@ -23,4 +23,4 @@ function Recipes() {
   )
 }
 
-export default Recipes
+export default RecipesView
