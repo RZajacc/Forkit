@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import {Container, Row } from "react-bootstrap";
+import RecipeCard from "./RecipeCard";
 
 interface RecipeGeneral {
   id: number,
@@ -24,15 +25,15 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
       image : '',
     }
   ])
-  const [totalResults, setTotalResults] = useState<number | null>(null)
-  const [offset, setOffset] = useState<number | null>(null)
+  const [totalResults, setTotalResults] = useState<number>(0)
+  const [offset, setOffset] = useState<number>(0)
 
 
   const fetchRecipesList = async () => {
     const baseUrl = 'https://api.spoonacular.com/recipes/';
     const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
-    const number = 1;
-    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&number=${number}`;
+    const number = 6;
+    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&number=${number}&offset=${offset}`;
 
     try {
       // * ----- FETCH ----------------
@@ -60,9 +61,15 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
   return (
     <>
       <Container>
-        {recipesData && recipesData.map((recipe, idx) => {
-          return <p key={idx}>{recipe.title}</p>
+        <div className="text-center">
+          <p>Total amount or recipes found: <strong>{ totalResults }</strong></p>
+        </div>
+        <Row xs={2} md={3} className="g-4">
+          {recipesData && recipesData.map((recipe) => {
+            return <RecipeCard recipe={recipe} id={recipe.id} key={recipe.id}/>
         })}
+        </Row>
+        
       </Container>
     </>
   )

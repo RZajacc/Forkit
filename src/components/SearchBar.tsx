@@ -3,14 +3,22 @@ import { ChangeEvent, useState } from "react";
 
 import "../style/SearchBar.css"
 
+interface searchObject {
+  searchVal: string,
+  dishType: string,
+  cuisine: string,
+  dietType:string,
+}
+
 interface Props {
   setSearchVal: (searchVal:string) => void,
   setDishType: (dishType:string) => void,
   setCuisine: (cuisine:string) => void,
-  setDietType: (dietType:string) => void,
+  setDietType: (dietType: string) => void,
+  setSearchObj: (searchObj: searchObject) => void,
 }
 
-function SearchBar({setSearchVal, setDishType, setCuisine, setDietType} : Props) {
+function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearchObj} : Props) {
 
   
   // * Values to prefill select boxes
@@ -32,6 +40,10 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType} : Props)
     setTempSearchVal(e.target.value);
   }
 
+  // !TODO Start here with assigning search object after click
+  // !TODO Probably also move to this component usestates instead of passing here setters!
+  // !TODO Adjust Props
+  // !TODO Maybe create a types component to keet it cleaner here
   const handleSearchButtonClick = () => {
     setSearchVal(tempSearchVal)
   }
