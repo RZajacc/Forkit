@@ -30,8 +30,8 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
   const fetchRecipesList = async () => {
     const baseUrl = 'https://api.spoonacular.com/recipes/';
     const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
-    const page = '10';
-    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&page=${page}}`;
+    const number = 1;
+    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&number=${number}`;
 
     try {
       // * ----- FETCH ----------------
