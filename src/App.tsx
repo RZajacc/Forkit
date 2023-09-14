@@ -18,14 +18,13 @@ import ErrorPage from "./views/ErrorPage";
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root />}>
+      <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
         <Route index element={<Home/>} />
         <Route path="recipes" element={<RecipesView/>} />
         {/* <Route path="details" element={<RecipeDetails />} /> */}
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="*" element={<ErrorPage/>} />
       </Route>
     )
   );  
@@ -33,7 +32,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
-      {/* <Outlet/> */}
     </>
   )
 }
