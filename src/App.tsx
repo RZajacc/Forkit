@@ -13,6 +13,7 @@ import Login from "./views/Login";
 import AppNav from "./components/AppNav";
 import Register from "./views/Register";
 import Home from "./views/Home";
+import ErrorPage from "./views/ErrorPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,7 +24,8 @@ function App() {
         {/* <Route path="details" element={<RecipeDetails />} /> */}
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register/>} />
+        <Route path="register" element={<Register />} />
+        <Route path="*" element={<ErrorPage/>} />
       </Route>
     )
   );  

@@ -1,8 +1,12 @@
+import TopSection from "../components/TopSection"
 
 
 function Contact() {
   return (
-    <div>Contact</div>
+    <>
+      <TopSection/>
+      <div>Contact</div>
+    </>
   )
 }
 

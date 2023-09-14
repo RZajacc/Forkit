@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
 
 interface RecipeGeneral {
   id: number,
@@ -58,9 +59,11 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
   
   return (
     <>
-    {recipesData && recipesData.map((recipe, idx) => {
-      return <p key={idx}>{recipe.title}</p>
-    })}
+      <Container>
+        {recipesData && recipesData.map((recipe, idx) => {
+          return <p key={idx}>{recipe.title}</p>
+        })}
+      </Container>
     </>
   )
 }

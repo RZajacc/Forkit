@@ -1,7 +1,11 @@
+import TopSection from "../components/TopSection"
 
 function Login() {
   return (
-    <div>Login</div>
+    <>
+      <TopSection/>
+      <div>Login</div>
+    </>
   )
 }
 

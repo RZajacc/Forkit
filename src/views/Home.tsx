@@ -1,8 +1,12 @@
+import TopSection from "../components/TopSection";
 
 
 function Home() {
-  return (
-    <div>Home</div>
+    return (
+      <>
+        <TopSection/>
+        <div>Home</div>
+      </>
   )
 }
 

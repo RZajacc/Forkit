@@ -1,7 +1,11 @@
+import TopSection from "../components/TopSection"
 
 function Register() {
   return (
-    <div>Register</div>
+    <>
+      <TopSection/>
+      <div>Register</div>
+    </>
   )
 }
 
