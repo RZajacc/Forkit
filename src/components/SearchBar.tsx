@@ -11,14 +11,10 @@ interface searchObject {
 }
 
 interface Props {
-  setSearchVal: (searchVal:string) => void,
-  setDishType: (dishType:string) => void,
-  setCuisine: (cuisine:string) => void,
-  setDietType: (dietType: string) => void,
   setSearchObj: (searchObj: searchObject) => void,
 }
 
-function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearchObj} : Props) {
+function SearchBar({setSearchObj} : Props) {
 
   
   // * Values to prefill select boxes
@@ -33,21 +29,26 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearc
   const availableDietTypes = ['Gluten Free', 'Ketogenic', 'Vegetarian', 'Lacto-Vegetarian', 'Ovo-Vegetarian',
     'Vegan', 'Pescetarian', 'Paleo', 'Primal', 'Low FODMAP', 'Whole30']
   
-  const [tempSearchVal, setTempSearchVal] = useState<string>('')
+  // * Values use states
+  const [searchVal, setSearchVal] = useState<string>('')
+  const [dishType, setDishType] = useState<string>('')
+  const [cuisine, setCuisine] = useState<string>('')
+  const [dietType, setDietType] = useState<string>('')
   
+  
+  const handleSearchButtonClick = () => {
+    setSearchObj({
+      searchVal: searchVal,
+      dishType: dishType,
+      cuisine: cuisine,
+      dietType: dietType,
+    })
+  }
 
   const handleSearchValue = (e : ChangeEvent<HTMLInputElement>) => {
-    setTempSearchVal(e.target.value);
+    setSearchVal(e.target.value);
   }
-
-  // !TODO Start here with assigning search object after click
-  // !TODO Probably also move to this component usestates instead of passing here setters!
-  // !TODO Adjust Props
-  // !TODO Maybe create a types component to keet it cleaner here
-  const handleSearchButtonClick = () => {
-    setSearchVal(tempSearchVal)
-  }
-
+  
   const handleDishType = (e : ChangeEvent<HTMLSelectElement>) => {
     setDishType(e.target.value);
   }
@@ -62,10 +63,11 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearc
 
   return (
     <Container fluid id="search-container">
-      <Row className="justify-content-md-center">
-        <Col xs={10}>
-          <Row className="justify-content-md-center" id="search-boxes-container" xs={2} lg={4}>
-            <Col >
+      <Row className="justify-content-md-center" xs={1} md={2}>
+        <Col >
+          <Row className="justify-content-md-center search-boxes-container" xs={1} md={2}>
+            <Col>
+                <Form.Label>Search by name:</Form.Label>
                <InputGroup>
                 <InputGroup.Text id="search-val">&#128269;</InputGroup.Text>
                 <Form.Control
@@ -74,24 +76,25 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearc
                   aria-describedby="search-val"
                   onChange={handleSearchValue}
                 />
-                  <Button variant="warning" id="button-addon1" onClick={handleSearchButtonClick}>
-                    Search
-                  </Button>
               </InputGroup>
             </Col>
 
             <Col >
+              <Form.Label>Select dish type:</Form.Label>
                <Form.Select aria-label="dish-type-select" onChange={handleDishType}>
-                <option value={'all'}>Select dish type</option>
+                <option value={''}>All dish types</option>
                 {availableDishTypes.map((type, idx) => {
                   return <option key={idx} value={type}>{type}</option>
                 })}
               </Form.Select>
             </Col>
+          </Row>
 
+          <Row className="justify-content-md-center search-boxes-container" xs={1} md={2}>
             <Col >
+               <Form.Label>Select cuisine:</Form.Label>
                <Form.Select aria-label="cousine-select" id="select-box" onChange={handleCuisineType}>
-                <option value={'all'}>Choose cuisine</option>
+                <option value={''}>Any cuisine</option>
                 {availableCuisines.map((cousine, idx) => {
                   return <option key={idx} value={cousine}>{cousine}</option>
                 })}
@@ -99,14 +102,22 @@ function SearchBar({setSearchVal, setDishType, setCuisine, setDietType, setSearc
             </Col>
 
             <Col >
+                <Form.Label>Select diet type:</Form.Label>
                <Form.Select aria-label="diet-type-select" onChange={handleDietType}>
-                <option value={'all'}>Diet type</option>
+                <option value={''}>Any diet type</option>
                 {availableDietTypes.map((type, idx) => {
                   return <option key={idx} value={type}>{type}</option>
                 })}
               </Form.Select>
             </Col>
-            
+          </Row>
+          
+          <Row className="justify-content-md-center" xs={1} md={1}>
+            <Col className="text-center">
+              <Button variant="warning" id="search-button" onClick={handleSearchButtonClick}>
+                Search for recipes
+              </Button>
+            </Col>
           </Row>
         </Col>
       </Row>

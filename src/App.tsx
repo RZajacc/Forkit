@@ -14,6 +14,7 @@ import AppNav from "./components/AppNav";
 import Register from "./views/Register";
 import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
+import Footer from "./components/Footer";
 
 function App() {
   const router = createBrowserRouter(
@@ -40,7 +41,8 @@ const Root = () => {
   return (
     <>
       <AppNav/>
-      <Outlet/>
+      <Outlet />
+      <Footer/>
     </>
   )
 }

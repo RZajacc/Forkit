@@ -1,10 +1,14 @@
-import React from 'react'
+import { Container, Row } from 'react-bootstrap'
 
 type Props = {}
 
-function Footer({}: Props) {
+function Footer() {
   return (
-    <div>Footer</div>
+    <Container fluid id='footer'>
+      <Row className='text-center'>
+        <p>&reg;Rafal Zajac</p>
+      </Row>
+    </Container>
   )
 }
 

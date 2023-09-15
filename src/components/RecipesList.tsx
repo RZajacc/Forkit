@@ -9,14 +9,19 @@ interface RecipeGeneral {
 }
 
 interface Props {
+  searchObj: searchObject,
+}
+
+interface searchObject {
   searchVal: string,
   dishType: string,
   cuisine: string,
-  dietType: string,
+  dietType:string,
 }
 
-function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
+function RecipesList({searchObj} : Props) {
   
+  console.log(searchObj.dietType);
   // * ------------ DEFINE USESTATES -------------------------------
   const [recipesData, setRecipesData] = useState<RecipeGeneral[]>([
     {
@@ -33,7 +38,7 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
     const baseUrl = 'https://api.spoonacular.com/recipes/';
     const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
     const number = 6;
-    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchVal}&type=${dishType}&cuisine${cuisine}&diet=${dietType}&number=${number}&offset=${offset}`;
+    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchObj.searchVal}&type=${searchObj.dishType}&cuisine${searchObj.cuisine}&diet=${searchObj.dietType}&number=${number}&offset=${offset}`;
 
     try {
       // * ----- FETCH ----------------
@@ -54,13 +59,13 @@ function RecipesList({searchVal, dishType, cuisine, dietType} : Props) {
    
   useEffect(() => {
      fetchRecipesList()   
-  }, [searchVal, dishType, cuisine, dietType])
+  }, [searchObj])
   
 
   
   return (
     <>
-      <Container>
+      <Container id="recipes-list-container">
         <div className="text-center">
           <p>Total amount or recipes found: <strong>{ totalResults }</strong></p>
         </div>

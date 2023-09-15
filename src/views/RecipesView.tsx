@@ -13,11 +13,6 @@ interface searchObject {
 
 function RecipesView() {
   
-  // * Values use states
-  const [searchVal, setSearchVal] = useState<string>('')
-  const [dishType, setDishType] = useState<string>('')
-  const [cuisine, setCuisine] = useState<string>('')
-  const [dietType, setDietType] = useState<string>('')
   const [searchObj, setSearchObj] = useState<searchObject>({
     searchVal: '',
     dishType: '',
@@ -25,12 +20,12 @@ function RecipesView() {
     dietType: '',
   })
 
+  console.log(searchObj);
   
     return (
     <>
-        <SearchBar setSearchVal={setSearchVal} setDishType={setDishType} setCuisine={setCuisine} setDietType={setDietType} setSearchObj={setSearchObj} />
-        <RecipesList searchVal={searchVal} dishType={dishType} cuisine={cuisine} dietType={dietType} />
-        <Footer/>
+      <SearchBar setSearchObj={setSearchObj} />
+      <RecipesList searchObj={searchObj} />
     </>
   )
 }
