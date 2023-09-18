@@ -1,33 +1,51 @@
 import { useEffect, useState } from "react";
 import {Container, Row } from "react-bootstrap";
 import RecipeCard from "./RecipeCard";
+import { RecipeGeneral, searchObject } from "../types/types";
 
-interface RecipeGeneral {
-  id: number,
-  title: string,
-  image: string
-}
 
 interface Props {
   searchObj: searchObject,
 }
 
-interface searchObject {
-  searchVal: string,
-  dishType: string,
-  cuisine: string,
-  dietType:string,
-}
-
 function RecipesList({searchObj} : Props) {
   
-  console.log(searchObj.dietType);
+
   // * ------------ DEFINE USESTATES -------------------------------
   const [recipesData, setRecipesData] = useState<RecipeGeneral[]>([
     {
       id: 0,
       title: '',
-      image : '',
+      image: '',
+      sustainable: false,
+      healthScore: 0,
+      readyInMinutes: 0,
+      servings: 0,
+      extendedIngredients: [
+        {
+          original: '',
+          measures: {
+            metric: {
+              amount: 0,
+              unitShort: '',
+            }
+          }
+        }
+      ],
+      analyzedInstructions: [
+        {
+          steps: [
+            {
+              number: 0,
+              step: '',
+              length: {
+                number: 0,
+                unit: '',
+              }
+           }
+         ]
+       }
+      ]
     }
   ])
   const [totalResults, setTotalResults] = useState<number>(0)
@@ -35,10 +53,21 @@ function RecipesList({searchObj} : Props) {
 
 
   const fetchRecipesList = async () => {
-    const baseUrl = 'https://api.spoonacular.com/recipes/';
+    
+    // * Prepare custom queries if they are selected
+    const query = searchObj.searchVal != '' ? `&query=${searchObj.searchVal}` : '';
+    const dishType = searchObj.dishType != '' ? `&type=${searchObj.dishType}` : '';
+    const cuisineType = searchObj.cuisine != '' ? `&cuisine=${searchObj.cuisine}` : '';
+    const dietType = searchObj.dietType != '' ? `&diet=${searchObj.dietType}` : '';
+
+    // * Prepare link
     const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
     const number = 6;
-    const url = `${baseUrl}complexSearch?apiKey=${apiKey}&query=${searchObj.searchVal}&type=${searchObj.dishType}&cuisine${searchObj.cuisine}&diet=${searchObj.dietType}&number=${number}&offset=${offset}`;
+    const baseUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=${number}&offset=${offset}&addRecipeInformation=true&fillIngredients=true`;
+    
+    
+    const url = `${baseUrl}${query}${dishType}${cuisineType}${dietType}`;
+
 
     try {
       // * ----- FETCH ----------------
@@ -61,7 +90,7 @@ function RecipesList({searchObj} : Props) {
      fetchRecipesList()   
   }, [searchObj])
   
-
+  console.log(recipesData);
   
   return (
     <>

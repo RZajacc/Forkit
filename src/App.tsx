@@ -15,6 +15,7 @@ import Register from "./views/Register";
 import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
 import Footer from "./components/Footer";
+import RecipeDetails from "./views/RecipeDetails";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,7 +23,7 @@ function App() {
       <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
         <Route index element={<Home/>} />
         <Route path="recipes" element={<RecipesView/>} />
-        {/* <Route path="details" element={<RecipeDetails />} /> */}
+        <Route path="recipes/:id" element={<RecipeDetails />} />
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

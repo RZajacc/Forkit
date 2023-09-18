@@ -19,8 +19,6 @@ function RecipesView() {
     cuisine: '',
     dietType: '',
   })
-
-  console.log(searchObj);
   
     return (
     <>

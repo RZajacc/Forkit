@@ -8,7 +8,7 @@ function AppNav() {
       <Container fluid>
         <LinkContainer to={"/"}>
         <Navbar.Brand>
-          <img src="hungry.svg" width="40" height="40"
+          <img src="../public/hungry.svg" width="40" height="40"
             className="d-inline-block align-top" alt="Forkit logo"/>Forkit
         </Navbar.Brand>
         </LinkContainer>

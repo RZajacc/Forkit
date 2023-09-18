@@ -2,13 +2,9 @@ import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap"
 import { ChangeEvent, useState } from "react";
 
 import "../style/SearchBar.css"
+import { searchObject } from "../types/types";
 
-interface searchObject {
-  searchVal: string,
-  dishType: string,
-  cuisine: string,
-  dietType:string,
-}
+
 
 interface Props {
   setSearchObj: (searchObj: searchObject) => void,
