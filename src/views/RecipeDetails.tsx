@@ -17,15 +17,15 @@ function RecipeDetails() {
   const nutritionStyle = {
     border: "1px solid black",
     padding: '3px',
-    borderRadius: '42%'
+    borderRadius: '42%',
   }
 
   const sectionsStyle = {
-    marginTop: '20px'
+    marginTop: '20px',
   }
 
   const containerStyle = {
-    marginBottom: '75px'
+    marginBottom: '75px',
   }
 
   

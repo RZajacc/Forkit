@@ -90,7 +90,7 @@ function RecipesList({searchObj} : Props) {
      fetchRecipesList()   
   }, [searchObj])
   
-  console.log(recipesData);
+ 
   
   return (
     <>

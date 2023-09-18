@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 
 import RecipesView from "./views/RecipesView"
-// import RecipeDetails from "./views/RecipeDetails";
 import Contact from "./views/Contact";
 import Login from "./views/Login";
 import AppNav from "./components/AppNav";
@@ -16,6 +15,7 @@ import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
 import Footer from "./components/Footer";
 import RecipeDetails from "./views/RecipeDetails";
+import { AuthContextProvider} from "./context/AuthContext";
 
 function App() {
   const router = createBrowserRouter(
@@ -33,7 +33,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   )
 }

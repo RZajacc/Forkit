@@ -1,7 +1,6 @@
 import { useState } from "react";
 import SearchBar from '../components/SearchBar'
 import RecipesList from '../components/RecipesList'
-import Footer from '../components/Footer'
 
 interface searchObject {
   searchVal: string,
