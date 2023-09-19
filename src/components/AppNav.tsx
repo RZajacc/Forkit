@@ -1,8 +1,15 @@
-import { Container, Navbar, Nav, NavDropdown, NavLink } from "react-bootstrap"
+import { useContext } from "react"
+import { Container, Navbar, Nav, NavDropdown, NavLink, Button } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
+import { AuthContext } from "../context/AuthContext"
 
 
 function AppNav() {
+
+  const { user, login, logout } = useContext(AuthContext);
+
+  
+
   return (
       <Navbar expand="lg" className="p-3">
       <Container fluid>
@@ -28,7 +35,13 @@ function AppNav() {
               </LinkContainer>
               <LinkContainer to={"register"}>
                 <NavDropdown.Item>Register</NavDropdown.Item> 
-              </LinkContainer>                   
+              </LinkContainer> 
+              {user ? (
+                <Button variant="danger" onClick={logout}>Logout</Button> 
+              ): (
+                  <Button variant="info" onClick={login}>Login</Button>
+               )
+              }
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>

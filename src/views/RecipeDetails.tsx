@@ -47,15 +47,14 @@ function RecipeDetails() {
         
         <h4 className="text-center" style={sectionsStyle}>Ingredient list:</h4>
         <ul>
-          {recipe.extendedIngredients.map((ingredient) => {
+          {recipe.extendedIngredients.map((ingredient, idx) => {
             return (
               <>
               
-              <li>{ingredient.original} ({ingredient.measures.metric.amount} {ingredient.measures.metric.unitShort})</li>
+              <li key={idx}>{ingredient.original} ({ingredient.measures.metric.amount} {ingredient.measures.metric.unitShort})</li>
               </>
               )            
           })}
-          
         </ul>
 
         <h4 className="text-center" style={sectionsStyle}>Instructions: </h4>
