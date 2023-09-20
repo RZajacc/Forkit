@@ -23,6 +23,7 @@ interface AuthContextProviderProps {
     children: ReactNode,
 }
 
+
 // ? 1- Create a Context
 export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 
@@ -31,7 +32,7 @@ export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
-   const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
     const register = async (email: string, password: string) => {
       try {
@@ -61,9 +62,10 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   
   const logout = () => {
     signOut(auth).then(() => {
-      setUser(null)
+      setUser(null);
+      localStorage.removeItem('user');
     }).catch((error) => {
-      console.log("Error :>>", error);
+      console.log("Error :>>", error)
     });
     
   }
@@ -74,6 +76,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         const uid = user.uid;
         console.log("User is still logged in");
         console.log("Uid :>>", uid);
+        localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
       } else {
         console.log("User is logged out");
@@ -82,6 +85,12 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   }
 
   useEffect(() => {
+    const localUser = localStorage.getItem('user');
+    
+    if (localUser != null) {
+      const rememberedUser = JSON.parse(localUser);
+      setUser(rememberedUser)
+    }
     checkIfUserIsActive()
   }, [])
   
