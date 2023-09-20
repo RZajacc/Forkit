@@ -1,19 +1,20 @@
-import { ReactNode, createContext, useState } from "react";
-import { User } from "../types/types";
-import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { ReactNode, createContext, useState, useEffect } from "react";
+import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
+import { auth } from "../config/firebaseConfig";
 
 // ? TYPES
 interface AuthContextType {
     user: User | null,
     setUser: (user: User) => void,
-    login: () => void,
+    register: (email:string, password:string) => void,
+    login: (email: string, password: string) => void,
     logout: () => void,
 }
 
 const AuthInitContext = {
     user: null,
     setUser: () => console.log("user not yet defined"),
+    register: () => console.log("context not initialized"),
     login: () => console.log("User state not yet defined"),
     logout: () => console.log("User state not yet defined"),
 }
@@ -30,40 +31,63 @@ export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-    apiKey: import.meta.env.VITE_APIKEY,
-    authDomain: import.meta.env.VITE_AUTHDOMAIN,
-    projectId: import.meta.env.VITE_PROJECTID,
-    storageBucket: import.meta.env.VITE_STORAGEBUCKET,
-    messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
-    appId: import.meta.env.VITE_APPID
-    };
+   const [user, setUser] = useState<User | null>(null);
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-
-    // Initialize Firebase Authentication and get a reference to the service
-    const auth = getAuth(app);
-    console.log(auth)
-
-    const [user, setUser] = useState<User | null>(null)
-
-    const login = () => {
-    setUser({
-      name: 'John',
-      lastName: 'Doe',
-      email: 'j.doe@gmail.com',
-      password: '12345',
-    })
+    const register = async (email: string, password: string) => {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const registeredUser = userCredential.user;
+        console.log("Registered user", registeredUser)
+      } catch (error) {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log("error", errorMessage);
+      }
+    }
+  
+  const login = async (email: string, password: string) => {
+      
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const loggedUser = userCredential.user;
+      setUser(loggedUser);
+      console.log("Logged user", loggedUser)
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log("Error ", errorMessage);
+    }
   }
-
+  
   const logout = () => {
-    setUser(null)
+    signOut(auth).then(() => {
+      setUser(null)
+    }).catch((error) => {
+      console.log("Error :>>", error);
+    });
+    
   }
+
+  const checkIfUserIsActive = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log("User is still logged in");
+        console.log("Uid :>>", uid);
+        setUser(user);
+      } else {
+        console.log("User is logged out");
+      }
+    });
+  }
+
+  useEffect(() => {
+    checkIfUserIsActive()
+  }, [])
+  
 
     return (
-        <AuthContext.Provider value={{user, setUser, login, logout}}>
+        <AuthContext.Provider value={{user, setUser, login, logout, register}}>
             {children}
         </AuthContext.Provider>
     )

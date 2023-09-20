@@ -47,20 +47,17 @@ function RecipeDetails() {
         
         <h4 className="text-center" style={sectionsStyle}>Ingredient list:</h4>
         <ul>
-          {recipe.extendedIngredients.map((ingredient, idx) => {
+          {recipe.extendedIngredients.map((ingredient, indRec) => {
             return (
-              <>
-              
-              <li key={idx}>{ingredient.original} ({ingredient.measures.metric.amount} {ingredient.measures.metric.unitShort})</li>
-              </>
+              <li key={indRec}>{ingredient.original} ({ingredient.measures.metric.amount} {ingredient.measures.metric.unitShort})</li> 
               )            
           })}
         </ul>
 
         <h4 className="text-center" style={sectionsStyle}>Instructions: </h4>
         <ol>
-          {recipe.analyzedInstructions[0].steps.map((step) => {
-            return <li>{step.step}</li>
+          {recipe.analyzedInstructions[0].steps.map((step, idx) => {
+            return <li key={idx}>{step.step}</li>
           })}
         </ol>
         

@@ -17,8 +17,12 @@ import Footer from "./components/Footer";
 import RecipeDetails from "./views/RecipeDetails";
 import { AuthContextProvider} from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { app } from "./config/firebaseConfig";
+
 
 function App() {
+
+  console.log(app)
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
