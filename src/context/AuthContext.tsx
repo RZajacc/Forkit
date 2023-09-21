@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
-import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from 'firebase/auth'
+import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider, linkWithPopup} from 'firebase/auth'
 import { auth } from "../config/firebaseConfig";
 
 // ? TYPES
@@ -7,7 +7,9 @@ interface AuthContextType {
     user: User | null,
     setUser: (user: User) => void,
     register: (email:string, password:string) => void,
-    login: (email: string, password: string) => void,
+    loginEmail: (email: string, password: string) => void,
+    loginGoogle: () => void,
+    loginGithub: () => void,
     logout: () => void,
 }
 
@@ -15,7 +17,9 @@ const AuthInitContext = {
     user: null,
     setUser: () => console.log("user not yet defined"),
     register: () => console.log("context not initialized"),
-    login: () => console.log("User state not yet defined"),
+    loginEmail: () => console.log("User state not yet defined"),
+    loginGoogle: () => console.log("User state not yet defined"),
+    loginGithub: () => console.log("User state not yet defined"),
     logout: () => console.log("User state not yet defined"),
 }
 
@@ -34,6 +38,11 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
   const [user, setUser] = useState<User | null>(null);
 
+  // ! -------------TESTING GOOGLE LOGIN----------------
+  const providerGoogle = new GoogleAuthProvider();
+  const providerGithub = new GithubAuthProvider();
+ 
+
     const register = async (email: string, password: string) => {
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -46,7 +55,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       }
     }
   
-  const login = async (email: string, password: string) => {
+  const loginEmail = async (email: string, password: string) => {
       
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
@@ -59,6 +68,72 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       console.log("Error ", errorMessage);
     }
   }
+
+  const loginGoogle = () => {
+    signInWithPopup(auth, providerGoogle)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        // setUser(result.user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+      }
+  
+  const loginGithub = () => {
+    signInWithPopup(auth, providerGithub)
+      .then((result) => {
+        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        console.log("Inside of github")
+        // The signed-in user info.
+        const user = result.user;
+        setUser(user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log("Error message - ", errorMessage)
+        console.log("Current user", auth.currentUser);
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GithubAuthProvider.credentialFromError(error);
+        console.log('Email', credential)
+        // ...
+      });
+      }
+ 
+  // const provider = new GoogleAuthProvider();
+
+  // const loginGithub = () => {
+  //   console.log(auth.getUserByEmail('rf.zajac@gmail.com'));
+  //   linkWithPopup(auth.currentUser, provider).then((result) => {
+  //       // Accounts successfully linked.
+  //       const credential = GoogleAuthProvider.credentialFromResult(result);
+  //       const user = result.user;
+  //       // ...
+  //     }).catch((error) => {
+  //       // Handle Errors here.
+  //       // ...
+  //     });
+
+  //     }
+  
   
   const logout = () => {
     signOut(auth).then(() => {
@@ -69,6 +144,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     });
     
   }
+
 
   const checkIfUserIsActive = () => {
     onAuthStateChanged(auth, (user) => {
@@ -91,12 +167,13 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       const rememberedUser = JSON.parse(localUser);
       setUser(rememberedUser)
     }
+
     checkIfUserIsActive()
   }, [])
   
 
     return (
-        <AuthContext.Provider value={{user, setUser, login, logout, register}}>
+        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, logout, register}}>
             {children}
         </AuthContext.Provider>
     )

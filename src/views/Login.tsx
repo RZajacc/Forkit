@@ -7,7 +7,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login} = useContext(AuthContext);
+  const {loginEmail, loginGoogle, loginGithub} = useContext(AuthContext);
 
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,16 @@ function Login() {
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(email, password);
+    loginEmail(email, password);
+  }
+
+  const googleButtonStyle = {
+    border : "1px solid gray",
+    padding: '5px',
+  }
+
+  const otherLoggingOptions = {
+    margin: '15px',
   }
 
   return (
@@ -44,6 +53,16 @@ function Login() {
             Login
           </Button>
         </Form>
+
+        <div id="otherLoggingOptions" style={otherLoggingOptions}>
+          <Button variant="light" onClick={loginGoogle} style={googleButtonStyle}>
+            <img src="public\googleIcon.svg" /> Log in with Google
+          </Button>
+          <Button variant="dark" onClick={loginGithub}>
+            <img src="public/github.png" width={"45px"}/>Login in with Github</Button>
+        </div>
+
+    
       </Container>
     </>
   )
