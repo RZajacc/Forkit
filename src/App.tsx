@@ -18,11 +18,11 @@ import RecipeDetails from "./views/RecipeDetails";
 import { AuthContextProvider} from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { app } from "./config/firebaseConfig";
+import Dashboard from "./views/Dashboard";
 
 
 function App() {
 
-  console.log(app)
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
@@ -33,6 +33,11 @@ function App() {
             <RecipeDetails />
           </ProtectedRoute>  
         } />
+        <Route path="dashboard" element={
+          <ProtectedRoute>
+            <Dashboard/>
+          </ProtectedRoute>
+        }/>
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />

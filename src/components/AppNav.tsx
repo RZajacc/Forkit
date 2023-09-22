@@ -6,9 +6,10 @@ import { AuthContext } from "../context/AuthContext"
 
 function AppNav() {
 
-  const { user, login, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
-  
+  console.log("user-->", user)
+  console.log(user === null)
 
   return (
       <Navbar expand="lg" className="p-3">
@@ -28,21 +29,24 @@ function AppNav() {
             <LinkContainer to={"contact"}>
               <NavLink>Contact</NavLink>
             </LinkContainer>
-  
-            <NavDropdown title="Profile" id="basic-nav-dropdown" >
-              <LinkContainer to={"login"}>
-                <NavDropdown.Item>Login</NavDropdown.Item>
+
+            {user ? (
+              <>
+               <LinkContainer to={"dashboard"}>
+                 <NavLink>Dashboard</NavLink>
               </LinkContainer>
-              <LinkContainer to={"register"}>
-                <NavDropdown.Item>Register</NavDropdown.Item> 
-              </LinkContainer> 
-              {user ? (
-                <Button variant="danger" onClick={logout}>Logout</Button> 
-              ): (
-                  <Button variant="info" onClick={login}>Login</Button>
-               )
-              }
-            </NavDropdown>
+              <LinkContainer to={"contact"}>
+                <Button variant="danger" onClick={logout}>Logout</Button>
+              </LinkContainer>
+              </>
+              )
+              : (
+                <LinkContainer to={"login"}>
+                  <NavLink>Login</NavLink>
+                 </LinkContainer> 
+               
+              )
+            }
           </Nav>
         </Navbar.Collapse>
       </Container>

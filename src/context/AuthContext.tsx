@@ -10,6 +10,7 @@ interface AuthContextType {
     loginEmail: (email: string, password: string) => void,
     loginGoogle: () => void,
     loginGithub: () => void,
+    loginFacebook: () => void,
     logout: () => void,
 }
 
@@ -20,6 +21,7 @@ const AuthInitContext = {
     loginEmail: () => console.log("User state not yet defined"),
     loginGoogle: () => console.log("User state not yet defined"),
     loginGithub: () => console.log("User state not yet defined"),
+    loginFacebook: () => console.log("User state not yet defined"),
     logout: () => console.log("User state not yet defined"),
 }
 
@@ -41,7 +43,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   // ! -------------TESTING GOOGLE LOGIN----------------
   const providerGoogle = new GoogleAuthProvider();
   const providerGithub = new GithubAuthProvider();
- 
+  const providerFacebook = new FacebookAuthProvider();
 
     const register = async (email: string, password: string) => {
       try {
@@ -75,6 +77,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
+        console.log(credential)
         // The signed-in user info.
         // setUser(result.user);
         // IdP data available using getAdditionalUserInfo(result)
@@ -107,32 +110,44 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
+        const email = error.customData.email;
+        console.log('Error Code', errorCode)
         console.log("Error message - ", errorMessage)
         console.log("Current user", auth.currentUser);
         // The email of the user's account used.
-        const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GithubAuthProvider.credentialFromError(error);
-        console.log('Email', credential)
+        console.log('Credential', credential)
+        // ...
+      });
+  }
+  
+  const loginFacebook = () => {
+    signInWithPopup(auth, providerFacebook)
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        console.log("Logged in as -> ", user)
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = FacebookAuthProvider.credentialFromError(error);
+        console.log("Something went wrong")
         // ...
       });
       }
  
-  // const provider = new GoogleAuthProvider();
-
-  // const loginGithub = () => {
-  //   console.log(auth.getUserByEmail('rf.zajac@gmail.com'));
-  //   linkWithPopup(auth.currentUser, provider).then((result) => {
-  //       // Accounts successfully linked.
-  //       const credential = GoogleAuthProvider.credentialFromResult(result);
-  //       const user = result.user;
-  //       // ...
-  //     }).catch((error) => {
-  //       // Handle Errors here.
-  //       // ...
-  //     });
-
-  //     }
   
   
   const logout = () => {
@@ -173,7 +188,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   
 
     return (
-        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, logout, register}}>
+        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, loginFacebook, logout, register}}>
             {children}
         </AuthContext.Provider>
     )

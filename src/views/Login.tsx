@@ -7,7 +7,7 @@ function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {loginEmail, loginGoogle, loginGithub} = useContext(AuthContext);
+  const {loginEmail, loginGoogle, loginGithub, loginFacebook} = useContext(AuthContext);
 
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,8 +58,12 @@ function Login() {
           <Button variant="light" onClick={loginGoogle} style={googleButtonStyle}>
             <img src="public\googleIcon.svg" /> Log in with Google
           </Button>
-          <Button variant="dark" onClick={loginGithub}>
-            <img src="public/github.png" width={"45px"}/>Login in with Github</Button>
+          <Button variant="light" onClick={loginGithub}>
+            <img src="public/github.png" width={"45px"} />Login in with Github
+          </Button>
+           <Button variant="light" onClick={loginFacebook}>
+            <img src="public/facebook.png" width={"45px"} />Login in with Facebook
+          </Button>
         </div>
 
     
