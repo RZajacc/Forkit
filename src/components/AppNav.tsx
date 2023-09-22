@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { Container, Navbar, Nav, NavDropdown, NavLink, Button } from "react-bootstrap"
+import { Container, Navbar, Nav, NavLink, Button } from "react-bootstrap"
 import { LinkContainer } from 'react-router-bootstrap'
 import { AuthContext } from "../context/AuthContext"
 
@@ -8,8 +8,6 @@ function AppNav() {
 
   const { user, logout } = useContext(AuthContext);
 
-  console.log("user-->", user)
-  console.log(user === null)
 
   return (
       <Navbar expand="lg" className="p-3">

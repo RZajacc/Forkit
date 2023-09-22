@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
-import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider, linkWithPopup} from 'firebase/auth'
+import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider} from 'firebase/auth'
 import { auth } from "../config/firebaseConfig";
 
 // ? TYPES
@@ -40,114 +40,66 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
   const [user, setUser] = useState<User | null>(null);
 
-  // ! -------------TESTING GOOGLE LOGIN----------------
+  // ? -------------AUTH PROVIDERS LIST----------------
   const providerGoogle = new GoogleAuthProvider();
   const providerGithub = new GithubAuthProvider();
   const providerFacebook = new FacebookAuthProvider();
 
-    const register = async (email: string, password: string) => {
-      try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        const registeredUser = userCredential.user;
-        console.log("Registered user", registeredUser)
-      } catch (error) {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.log("error", errorMessage);
-      }
+  const register = async (email: string, password: string) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const registeredUser = userCredential.user;
+    } catch (error) {
+      console.log("error", error);
     }
+  }
   
   const loginEmail = async (email: string, password: string) => {
       
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const loggedUser = userCredential.user;
       setUser(loggedUser);
-      console.log("Logged user", loggedUser)
     } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.log("Error ", errorMessage);
+      console.log("Error ", error);
     }
   }
 
-  const loginGoogle = () => {
-    signInWithPopup(auth, providerGoogle)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        console.log(credential)
-        // The signed-in user info.
-        // setUser(result.user);
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        // ...
-      });
-      }
-  
-  const loginGithub = () => {
-    signInWithPopup(auth, providerGithub)
-      .then((result) => {
-        // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-        const credential = GithubAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
-        console.log("Inside of github")
-        // The signed-in user info.
-        const user = result.user;
-        setUser(user);
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        console.log('Error Code', errorCode)
-        console.log("Error message - ", errorMessage)
-        console.log("Current user", auth.currentUser);
-        // The email of the user's account used.
-        // The AuthCredential type that was used.
-        const credential = GithubAuthProvider.credentialFromError(error);
-        console.log('Credential', credential)
-        // ...
-      });
+  const loginGoogle = async () => {
+     
+    try {
+      const googleAuth = await signInWithPopup(auth, providerGoogle);
+      const credential = GoogleAuthProvider.credentialFromResult(googleAuth);
+      // const token = credential.accessToken;
+      console.log("Login google success")
+    } catch (error) {
+      console.log(error)
+    }
   }
-  
-  const loginFacebook = () => {
-    signInWithPopup(auth, providerFacebook)
-      .then((result) => {
-        // The signed-in user info.
-        const user = result.user;
 
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        const accessToken = credential.accessToken;
-        console.log("Logged in as -> ", user)
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.customData.email;
-        // The AuthCredential type that was used.
-        const credential = FacebookAuthProvider.credentialFromError(error);
-        console.log("Something went wrong")
-        // ...
-      });
-      }
+  const loginGithub = async () => {
+    try {
+      const gitHubAuth = await signInWithPopup(auth, providerGithub);
+      const credential = GithubAuthProvider.credentialFromResult(gitHubAuth);
+      // const token = credential.accessToken;
+      console.log("Github login success");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
  
+  const loginFacebook = async () => {
+    try {
+      const facebookAuth = await signInWithPopup(auth, providerFacebook);
+      // const user = facebookAuth.user;
+      const credential = FacebookAuthProvider.credentialFromResult(facebookAuth);
+      // const accessToken = credential.accessToken;
+      console.log("Facebook login success");
+    } catch (error) {
+      console.log(error)
+    }
+  }
   
   
   const logout = () => {
@@ -164,9 +116,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   const checkIfUserIsActive = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        console.log("User is still logged in");
-        console.log("Uid :>>", uid);
+        // const uid = user.uid;
         localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
       } else {

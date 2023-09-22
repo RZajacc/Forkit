@@ -9,7 +9,6 @@ import {
 import RecipesView from "./views/RecipesView"
 import Contact from "./views/Contact";
 import AppNav from "./components/AppNav";
-import Register from "./views/Register";
 import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
 import Footer from "./components/Footer";
@@ -39,7 +38,6 @@ function App() {
         }/>
         <Route path="contact" element={<Contact />} />
         <Route path="account" element={<Account />} />
-        <Route path="register" element={<Register />} />
       </Route>
     )
   );  

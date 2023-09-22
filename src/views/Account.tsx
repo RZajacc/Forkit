@@ -7,6 +7,8 @@ function Account() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPasswrod, setConfirmPasswrod] = useState("")
+  const [passwordErr, setPasswordErr] = useState("")
   const {loginEmail, loginGoogle, loginGithub, loginFacebook, register} = useContext(AuthContext);
 
 
@@ -18,6 +20,10 @@ function Account() {
     setPassword(e.target.value);
   }
 
+  const handleConfirmPasswrodChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setConfirmPasswrod(e.target.value);
+  }
+
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     loginEmail(email, password);
@@ -25,18 +31,17 @@ function Account() {
 
 
    const handleRegister = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    register(email, password);
+     e.preventDefault();
+     if (password !== confirmPasswrod) {
+       setPasswordErr("Provided passwords don't match!")
+      //  console.log("Passwords dont match")
+     } else {
+        setPasswordErr("");
+        register(email, password);
+        console.log("Passwords are fine")
+     }
   }
 
-  const googleButtonStyle = {
-    border : "1px solid gray",
-    padding: '5px',
-  }
-
-  const otherLoggingOptions = {
-    margin: '15px',
-  }
 
   const colStyle = {
     border: "2px solid gray",
@@ -51,6 +56,16 @@ function Account() {
     border: "1px solid black",
   }
 
+  const otherLoggingOptions = {
+    marginTop: "15px",
+  }
+
+  const errorStyle = {
+    // border: '1px solid black',
+    color: "red",
+    // display: "none",
+  }
+
   return (
     <>
       <TopSection/>
@@ -58,58 +73,66 @@ function Account() {
         <Row className="justify-content-md-center">
           <Col xs lg="4" style={colStyle}>
             <Form onSubmit={handleLogin} className="text-center">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange}/>
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
+              <h5>If you already have an account simply log in using preferred option:</h5>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange}/>
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+              </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
-            </Form.Group>
-            <Button variant="primary" type="submit" style={loginButtonStyle}>
-              Login
-            </Button>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
+              </Form.Group>
+              <Button variant="primary" type="submit" style={loginButtonStyle}>
+                Login
+              </Button>
             </Form>
             
-            <p className="text-center">Or select one of alternative logging options:</p>
-            <Button variant="light" onClick={loginGoogle} style={loginButtonStyle}>
-              <img src="public\googleIcon.svg" /> Log in with Google
-            </Button>
-                     
-            <Button variant="light" onClick={loginGithub} style={loginButtonStyle}>
-              <img src="public/github.png" width={"45px"} />Login in with Github
-            </Button>
+            <div style={otherLoggingOptions}>
+              <h5 className="text-center">Or select one of alternative logging options:</h5>
+              <Button variant="light" onClick={loginGoogle} style={loginButtonStyle}>
+                <img src="public\googleIcon.svg" /> Log in with Google
+              </Button>
+                      
+              <Button variant="light" onClick={loginGithub} style={loginButtonStyle}>
+                <img src="public/github.png" width={"45px"} />Login in with Github
+              </Button>
+            
           
-        
-            <Button variant="light" onClick={loginFacebook} style={loginButtonStyle} >
-              <img src="public/facebook.png" width={"45px"} />Login in with Facebook
-            </Button>
+              <Button variant="light" onClick={loginFacebook} style={loginButtonStyle} >
+                <img src="public/facebook.png" width={"45px"} />Login in with Facebook
+              </Button>
+            </div>
               
             
           </Col>
 
           <Col  xs lg="4" style={colStyle}>
             <Form onSubmit={handleRegister} className="text-center">
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange}/>
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+              <h5>If you don't have an account yet please use this register form:</h5>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} required/>
+                <Form.Text className="text-muted">
+                  We'll never share your email with anyone else.
+                </Form.Text>
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
-          </Form.Group>
-          <Button variant="primary" type="submit" style={loginButtonStyle}>
-            Register
-          </Button>
-        </Form>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
+                <Form.Label>Repeat password</Form.Label>
+                <Form.Control type="password" placeholder="confirm password" onChange={handleConfirmPasswrodChange}/>
+              </Form.Group>
+              <div style={errorStyle}>{passwordErr}</div>
+              <Button variant="primary" type="submit" style={loginButtonStyle}>
+                Register
+              </Button>
+            </Form>
           </Col>
         </Row>
         
