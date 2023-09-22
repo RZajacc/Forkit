@@ -8,7 +8,6 @@ import {
 
 import RecipesView from "./views/RecipesView"
 import Contact from "./views/Contact";
-import Login from "./views/Login";
 import AppNav from "./components/AppNav";
 import Register from "./views/Register";
 import Home from "./views/Home";
@@ -17,8 +16,8 @@ import Footer from "./components/Footer";
 import RecipeDetails from "./views/RecipeDetails";
 import { AuthContextProvider} from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import { app } from "./config/firebaseConfig";
 import Dashboard from "./views/Dashboard";
+import Account from "./views/Account";
 
 
 function App() {
@@ -39,7 +38,7 @@ function App() {
           </ProtectedRoute>
         }/>
         <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
+        <Route path="account" element={<Account />} />
         <Route path="register" element={<Register />} />
       </Route>
     )

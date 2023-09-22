@@ -41,8 +41,8 @@ function AppNav() {
               </>
               )
               : (
-                <LinkContainer to={"login"}>
-                  <NavLink>Login</NavLink>
+                <LinkContainer to={"account"}>
+                  <NavLink>Account</NavLink>
                  </LinkContainer> 
                
               )
