@@ -1,5 +1,6 @@
 import { useContext, ReactNode } from 'react'
 import { AuthContext } from '../context/AuthContext'
+import { Navigate } from 'react-router-dom';
 
 type ProtectedRouteProps = {
     children : ReactNode,
@@ -7,12 +8,12 @@ type ProtectedRouteProps = {
 
 function ProtectedRoute(props:ProtectedRouteProps) {
 
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     
 
   return (
       <>
-        {user ? props.children : <h2>Youre not allowed here</h2>}
+        {loading ? <h1>...Loading...</h1> : user ? props.children : <Navigate to="/account" />}
       </>
   )
 }

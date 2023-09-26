@@ -35,13 +35,13 @@ function AppNav() {
                  <NavLink>Dashboard</NavLink>
               </LinkContainer>
               <LinkContainer to={"account"}>
-                <Button variant="danger" onClick={logout}><img src="public/door-open-white.svg" alt="opened door" width="25px" /> Logout</Button>
+                <Button variant="danger" onClick={logout}><img src="../public/door-open-white.svg" alt="opened door" width="25px" /> Logout</Button>
               </LinkContainer>
               </>
               )
               : (
                 <LinkContainer to={"account"}>
-                  <NavLink><img src="public/account-50-black.png" width="25px" /> Account</NavLink>
+                  <NavLink><img src="../public/account-50-black.png" width="25px" /> Account</NavLink>
                  </LinkContainer> 
                
               )

@@ -1,7 +1,6 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
 import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider} from 'firebase/auth'
 import { auth } from "../config/firebaseConfig";
-import { useNavigate } from "react-router-dom";
 
 // ? TYPES
 interface AuthContextType {
@@ -13,6 +12,7 @@ interface AuthContextType {
     loginGithub: () => void,
     loginFacebook: () => void,
     logout: () => void,
+    loading: boolean,
 }
 
 const AuthInitContext = {
@@ -24,6 +24,7 @@ const AuthInitContext = {
     loginGithub: () => console.log("User state not yet defined"),
     loginFacebook: () => console.log("User state not yet defined"),
     logout: () => console.log("User state not yet defined"),
+    loading: true,
 }
 
 interface AuthContextProviderProps {
@@ -40,6 +41,7 @@ export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true)
 
   // ? -------------AUTH PROVIDERS LIST----------------
   const providerGoogle = new GoogleAuthProvider();
@@ -49,7 +51,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   const register = async (email: string, password: string) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const registeredUser = userCredential.user;
+      setUser(userCredential.user);
     } catch (error) {
       console.log("error", error);
     }
@@ -70,9 +72,8 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
      
     try {
       const googleAuth = await signInWithPopup(auth, providerGoogle);
-      const credential = GoogleAuthProvider.credentialFromResult(googleAuth);
-      // const token = credential.accessToken;
-      console.log("Login google success")
+      // const credential = GoogleAuthProvider.credentialFromResult(googleAuth);
+      setUser(googleAuth.user);
     } catch (error) {
       console.log(error)
     }
@@ -81,7 +82,8 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   const loginGithub = async () => {
     try {
       const gitHubAuth = await signInWithPopup(auth, providerGithub);
-      const credential = GithubAuthProvider.credentialFromResult(gitHubAuth);
+      setUser(gitHubAuth.user);
+      // const credential = GithubAuthProvider.credentialFromResult(gitHubAuth);
       // const token = credential.accessToken;
       console.log("Github login success");
     } catch (error) {
@@ -93,8 +95,8 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   const loginFacebook = async () => {
     try {
       const facebookAuth = await signInWithPopup(auth, providerFacebook);
-      // const user = facebookAuth.user;
-      const credential = FacebookAuthProvider.credentialFromResult(facebookAuth);
+      setUser(facebookAuth.user);
+      // const credential = FacebookAuthProvider.credentialFromResult(facebookAuth);
       // const accessToken = credential.accessToken;
       console.log("Facebook login success");
     } catch (error) {
@@ -106,7 +108,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   const logout = () => {
     signOut(auth).then(() => {
       setUser(null);
-      localStorage.removeItem('user');
+      // localStorage.removeItem('user');
     }).catch((error) => {
       console.log("Error :>>", error)
     });
@@ -118,10 +120,12 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         // const uid = user.uid;
-        localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
+        setLoading(false);
       } else {
         console.log("User is logged out");
+        setLoading(true);
       }
     });
   }
@@ -139,7 +143,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   
 
     return (
-        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, loginFacebook, logout, register}}>
+        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, loginFacebook, logout, register, loading}}>
             {children}
         </AuthContext.Provider>
     )
