@@ -9,6 +9,7 @@ function AppNav() {
   const { user, logout } = useContext(AuthContext);
 
 
+
   return (
       <Navbar expand="lg" className="p-3">
       <Container fluid>
@@ -33,14 +34,14 @@ function AppNav() {
                <LinkContainer to={"dashboard"}>
                  <NavLink>Dashboard</NavLink>
               </LinkContainer>
-              <LinkContainer to={"contact"}>
-                <Button variant="danger" onClick={logout}>Logout</Button>
+              <LinkContainer to={"account"}>
+                <Button variant="danger" onClick={logout}><img src="public/door-open-white.svg" alt="opened door" width="25px" /> Logout</Button>
               </LinkContainer>
               </>
               )
               : (
                 <LinkContainer to={"account"}>
-                  <NavLink>Account</NavLink>
+                  <NavLink><img src="public/account-50-black.png" width="25px" /> Account</NavLink>
                  </LinkContainer> 
                
               )

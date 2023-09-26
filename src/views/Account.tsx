@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from "react"
 import TopSection from "../components/TopSection"
 import { AuthContext } from "../context/AuthContext";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Account() {
 
@@ -9,8 +10,8 @@ function Account() {
   const [password, setPassword] = useState("");
   const [confirmPasswrod, setConfirmPasswrod] = useState("")
   const [passwordErr, setPasswordErr] = useState("")
-  const {loginEmail, loginGoogle, loginGithub, loginFacebook, register} = useContext(AuthContext);
-
+  const { loginEmail, loginGoogle, loginGithub, loginFacebook, register } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -27,19 +28,39 @@ function Account() {
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     loginEmail(email, password);
+    navigate('/dashboard');
+  }
+
+  const handleLoginGoogle = () => {
+    loginGoogle();
+    navigate('/dashboard');
+  }
+
+  const handleGithubLogin = () => {
+    loginGithub();
+    navigate('/dashboard');
+  }
+
+  const handleFacebookLogin = () => {
+    loginFacebook();
+    navigate('/dashboard');
   }
 
 
-   const handleRegister = (e: FormEvent<HTMLFormElement>) => {
-     e.preventDefault();
-     if (password !== confirmPasswrod) {
-       setPasswordErr("Provided passwords don't match!")
-      //  console.log("Passwords dont match")
-     } else {
-        setPasswordErr("");
-        register(email, password);
-        console.log("Passwords are fine")
-     }
+  const handleRegister = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (password !== confirmPasswrod) {
+      setPasswordErr("Provided passwords don't match!")
+    //  console.log("Passwords dont match")
+    } else {
+      setPasswordErr("");
+      register(email, password);
+      navigate('/dashboard');
+      console.log("Passwords are fine")
+      return (
+        <Navigate to={'/'} />
+      )
+    }
   }
 
 
@@ -93,16 +114,16 @@ function Account() {
             
             <div style={otherLoggingOptions}>
               <h5 className="text-center">Or select one of alternative logging options:</h5>
-              <Button variant="light" onClick={loginGoogle} style={loginButtonStyle}>
+              <Button variant="light" onClick={handleLoginGoogle} style={loginButtonStyle}>
                 <img src="public\googleIcon.svg" /> Log in with Google
               </Button>
                       
-              <Button variant="light" onClick={loginGithub} style={loginButtonStyle}>
+              <Button variant="light" onClick={handleGithubLogin} style={loginButtonStyle}>
                 <img src="public/github.png" width={"45px"} />Login in with Github
               </Button>
             
           
-              <Button variant="light" onClick={loginFacebook} style={loginButtonStyle} >
+              <Button variant="light" onClick={handleFacebookLogin} style={loginButtonStyle} >
                 <img src="public/facebook.png" width={"45px"} />Login in with Facebook
               </Button>
             </div>

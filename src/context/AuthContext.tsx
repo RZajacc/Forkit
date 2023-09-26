@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
 import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider} from 'firebase/auth'
 import { auth } from "../config/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 // ? TYPES
 interface AuthContextType {
