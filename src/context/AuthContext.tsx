@@ -74,6 +74,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       const googleAuth = await signInWithPopup(auth, providerGoogle);
       // const credential = GoogleAuthProvider.credentialFromResult(googleAuth);
       setUser(googleAuth.user);
+      googleAuth.user;
     } catch (error) {
       console.log(error)
     }
@@ -83,6 +84,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     try {
       const gitHubAuth = await signInWithPopup(auth, providerGithub);
       setUser(gitHubAuth.user);
+      console.log(gitHubAuth.user)
       // const credential = GithubAuthProvider.credentialFromResult(gitHubAuth);
       // const token = credential.accessToken;
       console.log("Github login success");
