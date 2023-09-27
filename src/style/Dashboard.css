@@ -1,0 +1,40 @@
+
+.dashboard-container {
+    border: 2px groove gray;
+    border-radius: 1%;
+    margin-top: 3%;
+    width: 40%;
+}
+
+.dashboard-content {
+    border-bottom: 1px solid gray;
+    margin: 1%;
+    padding: 5px;
+}
+
+.dashboard-top-content {
+    margin: 1%;
+    text-align: center;
+}
+
+.dashboard-bottom-content {
+    margin: 1%;
+    padding: 5px;
+}
+
+.dashboard-profile-pic {
+    width: 175px;
+    border-radius: 50%;
+}
+
+.dashboard-nouser-pic {
+    width: 175px;
+    border-radius: 50%;
+}
+
+.dashboard-button {
+    width: 250px;
+}
+
+
+

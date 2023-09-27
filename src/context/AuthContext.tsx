@@ -136,16 +136,6 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     checkIfUserIsActive();
   }, [loading])
   
-  // useEffect(() => {
-  //   const localUser = localStorage.getItem('user');
-    
-  //   if (localUser != null) {
-  //     const rememberedUser = JSON.parse(localUser);
-  //     setUser(rememberedUser)
-  //   }
-
-  //   checkIfUserIsActive()
-  // }, [])
   
 
     return (
