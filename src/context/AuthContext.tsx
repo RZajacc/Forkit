@@ -133,15 +133,19 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   }
 
   useEffect(() => {
-    const localUser = localStorage.getItem('user');
+    checkIfUserIsActive();
+  }, [loading])
+  
+  // useEffect(() => {
+  //   const localUser = localStorage.getItem('user');
     
-    if (localUser != null) {
-      const rememberedUser = JSON.parse(localUser);
-      setUser(rememberedUser)
-    }
+  //   if (localUser != null) {
+  //     const rememberedUser = JSON.parse(localUser);
+  //     setUser(rememberedUser)
+  //   }
 
-    checkIfUserIsActive()
-  }, [])
+  //   checkIfUserIsActive()
+  // }, [])
   
 
     return (

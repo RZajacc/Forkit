@@ -27,13 +27,13 @@ function Account() {
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginEmail(email, password);
     navigate('/dashboard');
+    loginEmail(email, password);
   }
 
   const handleLoginGoogle = () => {
-    loginGoogle();
     navigate('/dashboard');
+    loginGoogle();
   }
 
   const handleGithubLogin = () => {

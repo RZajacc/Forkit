@@ -6,9 +6,7 @@ import { Col, Container, Row } from "react-bootstrap";
 function Dashboard() {
 
   const { user } = useContext(AuthContext);
-  console.log(user?.email);
-  console.log(user?.providerData[0].email);
-
+ 
   const containerStyle = {
     border: "1px solid black",
   }
@@ -45,7 +43,7 @@ function Dashboard() {
           }
           </Row>
           <p><strong>User name: </strong> {user!.displayName ? user!.displayName : "No user name assigned"}</p>
-          <p><strong>Email: </strong> {user!.email === null ? user!.providerData[0].email : "No email assigned"}</p>
+          <p><strong>Email: </strong> {user!.email || user?.providerData[0].email}</p>
           <p><strong>Active since: </strong> {user ? user.metadata.creationTime : "No data" }</p>
           <p><strong>Last login: </strong> {user ? user.metadata.lastSignInTime : "No data" }</p>
        </Col>
