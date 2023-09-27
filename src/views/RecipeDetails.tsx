@@ -2,6 +2,7 @@ import { useLocation} from "react-router-dom";
 import TopSection from "../components/TopSection";
 import { Container } from "react-bootstrap";
 import { RecipeGeneral } from "../types/types";
+import Comments from "../components/Comments";
 
 interface LocationState {
   recipe: RecipeGeneral,
@@ -11,7 +12,7 @@ function RecipeDetails() {
 
   const location = useLocation();
   const { recipe } = location.state as LocationState;
-
+  
   
   // * ------ ELEMENTS STYLES -------------
   const nutritionStyle = {
@@ -60,6 +61,8 @@ function RecipeDetails() {
             return <li key={idx}>{step.step}</li>
           })}
         </ol>
+
+        <Comments recipeId={recipe.id} />
         
       </Container>
     </>

@@ -20,7 +20,6 @@ import Account from "./views/Account";
 
 
 function App() {
-  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
