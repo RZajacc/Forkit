@@ -82,9 +82,7 @@ function Account() {
   }
 
   const errorStyle = {
-    // border: '1px solid black',
     color: "red",
-    // display: "none",
   }
 
   return (
@@ -95,7 +93,7 @@ function Account() {
           <Col xs lg="4" style={colStyle}>
             <Form onSubmit={handleLogin} className="text-center">
               <h5>If you already have an account simply log in using preferred option:</h5>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="login-email">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange}/>
                 <Form.Text className="text-muted">
@@ -103,7 +101,7 @@ function Account() {
                 </Form.Text>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3" controlId="login-password">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
               </Form.Group>
@@ -134,7 +132,7 @@ function Account() {
           <Col  xs lg="4" style={colStyle}>
             <Form onSubmit={handleRegister} className="text-center">
               <h5>If you don't have an account yet please use this register form:</h5>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Group className="mb-3" controlId="register-email">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email" onChange={handleEmailChange} required/>
                 <Form.Text className="text-muted">
@@ -143,7 +141,7 @@ function Account() {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Group className="mb-3">
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" onChange={handlePasswordChange}/>
                 <Form.Label>Repeat password</Form.Label>
