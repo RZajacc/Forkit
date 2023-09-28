@@ -1,0 +1,23 @@
+
+.commentsContainer {
+    width: 70%;
+    margin-top: 5%;
+}
+
+.picStyle {
+    border-radius: 50%;
+    width: 70px;
+    margin-top: 20%;
+    margin-left: 12%;
+}
+
+.rowStyle {
+    margin: 3px;
+    border-radius: 5%;
+    background-color: #FAFAFA;
+}
+
+.dateStyle {
+    font-size: 0.7rem;
+    font-style: italic;
+}
