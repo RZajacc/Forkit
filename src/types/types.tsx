@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface searchObject {
   searchVal: string,
   dishType: string,
@@ -39,4 +41,12 @@ export interface RecipeGeneral {
       ]
     }
     ],
+}
+
+
+export interface commentsType {
+    author: string;
+    date: Timestamp;
+    message: string;
+    picUrl: string;
 }
