@@ -29,3 +29,17 @@
 #recipes-list-container {
     margin-bottom: 50px;
 }
+
+
+/* *------HOME PAGE--------- */
+.home-container {
+    margin-top: 3%;
+    font-family: "Garamond, serif";
+    font-size: 1.2rem;
+    padding: 5px;
+}
+
+.home-column {
+    margin-top: 30px;
+}
+
