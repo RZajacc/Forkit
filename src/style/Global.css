@@ -54,3 +54,18 @@
     width: 500px;
     height: 300px;
 }
+
+/* *------RECIPE PAGINATION--------- */
+.recipe-pagination {
+    margin-bottom: 3%;
+}
+
+.pag-button {
+    width: 100px;
+}
+
+.target-page {
+    color: green;
+    font-weight: bold;
+    font-size: 1.2rem;
+}

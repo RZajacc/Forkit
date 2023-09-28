@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SearchBar from '../components/SearchBar'
 import RecipesList from '../components/RecipesList'
+import Pagination from "../components/Pagination";
 
 interface searchObject {
   searchVal: string,
@@ -12,6 +13,7 @@ interface searchObject {
 
 function RecipesView() {
   
+  const [offset, setOffset] = useState<number>(0)
   const [searchObj, setSearchObj] = useState<searchObject>({
     searchVal: '',
     dishType: '',
@@ -21,8 +23,9 @@ function RecipesView() {
   
     return (
     <>
-      <SearchBar setSearchObj={setSearchObj} />
-      <RecipesList searchObj={searchObj} />
+      <SearchBar setSearchObj={setSearchObj}/>
+        <RecipesList searchObj={searchObj} offset={offset} setOffset={setOffset} />
+        <Pagination setOffset={setOffset} offset={offset } />
     </>
   )
 }

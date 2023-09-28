@@ -6,11 +6,12 @@ import { RecipeGeneral, searchObject } from "../types/types";
 
 interface Props {
   searchObj: searchObject,
+  offset: number,
+  setOffset: (offset: number)=> void,
 }
 
-function RecipesList({searchObj} : Props) {
+function RecipesList({searchObj,offset, setOffset} : Props) {
   
-
   // * ------------ DEFINE USESTATES -------------------------------
   const [recipesData, setRecipesData] = useState<RecipeGeneral[]>([
     {
@@ -49,8 +50,6 @@ function RecipesList({searchObj} : Props) {
     }
   ])
   const [totalResults, setTotalResults] = useState<number>(0)
-  const [offset, setOffset] = useState<number>(0)
-
 
   const fetchRecipesList = async () => {
     
@@ -75,11 +74,10 @@ function RecipesList({searchObj} : Props) {
       const data = await response.json();
       // * ----- ASSIGN VALUES ----------
       const recipeData = data.results as RecipeGeneral[];
-      const offsetVal = data.offset as number;
       const totalResVal = data.totalResults as number;
       // * ----- SET USESTATES ------------
       setTotalResults(totalResVal)
-      setOffset(offsetVal)
+      setOffset(data.offset as number);
       setRecipesData(recipeData);
     } catch (error) {
       console.log("Error --->", error);
@@ -88,7 +86,7 @@ function RecipesList({searchObj} : Props) {
    
   useEffect(() => {
      fetchRecipesList()   
-  }, [searchObj])
+  }, [searchObj, offset])
   
  
   
