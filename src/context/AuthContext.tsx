@@ -41,7 +41,7 @@ export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
     
   const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   // ? -------------AUTH PROVIDERS LIST----------------
   const providerGoogle = new GoogleAuthProvider();
@@ -125,9 +125,10 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         // localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
         setLoading(false);
+        console.log(user);
       } else {
         console.log("User is logged out");
-        setLoading(true);
+        setLoading(false);
       }
     });
   }

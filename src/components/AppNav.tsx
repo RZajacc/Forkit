@@ -43,7 +43,6 @@ function AppNav() {
                 <LinkContainer to={"account"}>
                   <NavLink><img src="../public/account-50-black.png" width="25px" /> Account</NavLink>
                  </LinkContainer> 
-               
               )
             }
           </Nav>
