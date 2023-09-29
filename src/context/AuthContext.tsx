@@ -125,7 +125,6 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
         // localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
         setLoading(false);
-        console.log(user);
       } else {
         console.log("User is logged out");
         setLoading(false);

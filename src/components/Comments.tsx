@@ -53,7 +53,6 @@ function Comments({ recipeId }: Props) {
         });
     }
     
-    console.log(comments)
 
     useEffect(() => {
         getCommentsLive();      
@@ -67,7 +66,7 @@ function Comments({ recipeId }: Props) {
                {comments && comments.map((comment, idx) => {
                 return <Comment key={idx} comment={comment} />  
             })}
-              <h5>Write a new comment:</h5>
+              {comments?.length==0 ? <p>Be the first person to comment this recipe!</p> : <p>Add a new comment:</p> }
               <input type="text" onChange={handleMessageInput} />
               <Button onClick={submitMessage}>Submit</Button>
         </Container>

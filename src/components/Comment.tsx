@@ -27,8 +27,6 @@ function Comment({ comment }: Props) {
     await deleteDoc(doc(db, "Comments", docID));
   }
 
-  console.log(comment);
-
   return (
      <Row className="rowStyle">
         <Col xs lg="2">
