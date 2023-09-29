@@ -43,10 +43,10 @@ export interface RecipeGeneral {
     ],
 }
 
-
 export interface commentsType {
+    recipeID: number,
     author: string;
-    date: Timestamp;
+    date: Timestamp | Date;
     message: string;
     picUrl: string;
 }

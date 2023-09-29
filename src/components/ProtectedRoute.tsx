@@ -9,8 +9,8 @@ type ProtectedRouteProps = {
 
 function ProtectedRoute(props:ProtectedRouteProps) {
 
-  const { user, loading } = useContext(AuthContext);
-    
+  const { user, loading } = useContext(AuthContext);  
+
   return (
     <>
       {loading ? <LoadingPage/> : user ? props.children : <Navigate to="/account" />}

@@ -1,10 +1,11 @@
-import { collection, getDocs } from "firebase/firestore";
-import {Container} from "react-bootstrap"
+import { addDoc, collection, onSnapshot, query, where} from "firebase/firestore";
+import {Button, Container} from "react-bootstrap"
 import { db } from "../config/firebaseConfig";
-import {useEffect, useState} from "react"
+import {ChangeEvent, useContext, useEffect, useState} from "react"
 import Comment from "./Comment";
 import { commentsType } from "../types/types";
 import "../style/Comment.css"
+import { AuthContext } from "../context/AuthContext";
 
 
 interface Props {
@@ -14,30 +15,59 @@ interface Props {
 
 function Comments({ recipeId }: Props) {
     
-    const [comments, setComments] = useState<commentsType[] | null>(null)
+    const [comments, setComments] = useState<commentsType [] | null>(null);
+    const [newMessage, setNewMessage] = useState("");
+    const {user} = useContext(AuthContext)
 
-    const getComments = async () => {
-        const querySnapshot = await getDocs(collection(db, "Comments"));
+    const handleMessageInput = (e: ChangeEvent<HTMLInputElement>) => {
+        setNewMessage(e.target.value);
+    }
+
+    const submitMessage = async () => {
+        const authorData = user ? user.displayName ? user.displayName : user.email : "No user";
+        const authorImage = user ? user.photoURL ? user.photoURL : "../public/noUser.png" : "No user";
+        const newChatMsg: commentsType = {
+            recipeID: recipeId,
+            author: authorData!,
+            picUrl: authorImage,
+            message: newMessage,
+            date: new Date(),
+        }
+        
+        // Add a new document with a generated id.
+        const docRef = await addDoc(collection(db, "Comments"), newChatMsg);
+        console.log(docRef);
+    }
+
+
+    // * Get messages with live update
+    const getCommentsLive = () => {
+        const q = query(collection(db, "Comments"), where("recipeID", "==", recipeId));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const comments: commentsType[] = [];
         querySnapshot.forEach((doc) => {
-            if (parseInt(doc.data().recipeID) === recipeId) {
-                setComments(doc.data().comments);
-                console.log("Comparison passed")
-            }
-    });
+            comments.push(doc.data() as commentsType);
+        });
+        setComments(comments);
+        });
     }
 
     useEffect(() => {
-        getComments();      
+        getCommentsLive();      
     }, [])
     
+    console.log(user?.uid);
 
   return (
       <>
         <Container className="commentsContainer">
-            <h5>Comments:</h5>
-            {comments && comments.map((comment, idx) => {
+              <h5>Comments:</h5>
+               {comments && comments.map((comment, idx) => {
                 return <Comment key={idx} comment={comment} />  
             })}
+              <h5>Write a new comment:</h5>
+              <input type="text" onChange={handleMessageInput} />
+              <Button onClick={submitMessage}>Submit</Button>
         </Container>
       </>
   )

@@ -17,7 +17,7 @@ function Comment({comment}: Props) {
         <Col xs lg="4">
         <p><strong>{comment.author}</strong></p>
         <p>{comment.message}</p> 
-        <p className="dateStyle">{formatDate(comment.date.seconds) }</p>      
+        <p className="dateStyle">{formatDate(comment.date)}</p>      
         </Col>
     </Row>
   )
