@@ -44,6 +44,7 @@ export interface RecipeGeneral {
 }
 
 export interface commentsType {
+    authorID: string,
     recipeID: number,
     author: string;
     date: Timestamp | Date;

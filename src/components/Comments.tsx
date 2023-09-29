@@ -27,6 +27,7 @@ function Comments({ recipeId }: Props) {
         const authorData = user ? user.displayName ? user.displayName : user.email : "No user";
         const authorImage = user ? user.photoURL ? user.photoURL : "../public/noUser.png" : "No user";
         const newChatMsg: commentsType = {
+            authorID: user!.uid,
             recipeID: recipeId,
             author: authorData!,
             picUrl: authorImage,
@@ -36,7 +37,7 @@ function Comments({ recipeId }: Props) {
         
         // Add a new document with a generated id.
         const docRef = await addDoc(collection(db, "Comments"), newChatMsg);
-        console.log(docRef);
+        // console.log(docRef);
     }
 
 
@@ -51,12 +52,13 @@ function Comments({ recipeId }: Props) {
         setComments(comments);
         });
     }
+    
+    console.log(comments)
 
     useEffect(() => {
         getCommentsLive();      
     }, [])
     
-    console.log(user?.uid);
 
   return (
       <>
