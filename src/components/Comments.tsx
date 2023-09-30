@@ -1,11 +1,12 @@
 import { addDoc, collection, onSnapshot, query, where} from "firebase/firestore";
-import {Button, Container} from "react-bootstrap"
+import {Button, Container, FloatingLabel, Form} from "react-bootstrap"
 import { db } from "../config/firebaseConfig";
 import {ChangeEvent, useContext, useEffect, useState} from "react"
 import Comment from "./Comment";
 import { commentsType } from "../types/types";
 import "../style/Comment.css"
 import { AuthContext } from "../context/AuthContext";
+import {  } from "react-router-dom";
 
 
 interface Props {
@@ -37,7 +38,6 @@ function Comments({ recipeId }: Props) {
         
         // Add a new document with a generated id.
         const docRef = await addDoc(collection(db, "Comments"), newChatMsg);
-        // console.log(docRef);
     }
 
 
@@ -52,7 +52,6 @@ function Comments({ recipeId }: Props) {
         setComments(comments);
         });
     }
-    
 
     useEffect(() => {
         getCommentsLive();      
@@ -66,9 +65,19 @@ function Comments({ recipeId }: Props) {
                {comments && comments.map((comment, idx) => {
                 return <Comment key={idx} comment={comment} />  
             })}
-              {comments?.length==0 ? <p>Be the first person to comment this recipe!</p> : <p>Add a new comment:</p> }
-              <input type="text" onChange={handleMessageInput} />
-              <Button onClick={submitMessage}>Submit</Button>
+              {/* {comments?.length==0 ? <p>Be the first person to comment this recipe!</p> : <p>Add a new comment:</p> } */}
+              
+              <FloatingLabel controlId="comment-textarea" label="Leave a comment here">
+                    <Form.Control
+                    as="textarea"
+                    placeholder="Leave a comment here"
+                    style={{ height: '100px' }}
+                    onChange={handleMessageInput}
+                  />
+              </FloatingLabel>
+              <div className="text-center">
+               <Button onClick={submitMessage} className="submit-message-button" variant="success">Submit your message</Button> 
+              </div>
         </Container>
       </>
   )

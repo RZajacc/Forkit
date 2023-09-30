@@ -26,3 +26,11 @@
 .delete-button {
     margin-left: 30%;
 }
+
+#comment-textarea {
+    margin: 10px 0px 10px 0px;
+}
+
+.submit-message-button {
+    width: 200px;
+}
