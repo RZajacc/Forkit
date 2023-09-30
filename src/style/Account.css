@@ -1,0 +1,19 @@
+.password-req {
+    text-align: left;
+}
+
+.password-req > * {
+    margin: 5px;
+    font-size: smaller;
+    color: gray;
+}
+
+.reg-errors {
+    color: red;
+    text-align: left;
+    font-size: smaller;
+}
+
+.reg-errors > * {
+    margin: 5px;
+}

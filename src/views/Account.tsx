@@ -3,13 +3,16 @@ import TopSection from "../components/TopSection"
 import { AuthContext } from "../context/AuthContext";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Navigate, useNavigate } from "react-router-dom";
+import "../style/Account.css";
+
 
 function Account() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPasswrod, setConfirmPasswrod] = useState("")
-  const [passwordErr, setPasswordErr] = useState("")
+  // const [passwordErr, setPasswordErr] = useState("")
+  const [passwordErr, setPasswordErr] = useState<string[] | null>(null);
   const { loginEmail, loginGoogle, loginGithub, loginFacebook, register } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -46,20 +49,41 @@ function Account() {
     navigate('/dashboard');
   }
 
+  console.log(/[A-Z]/.test('123'));
 
   const handleRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formValidation: string[] = [];
+
     if (password !== confirmPasswrod) {
-      setPasswordErr("Provided passwords don't match!")
-    //  console.log("Passwords dont match")
-    } else {
-      setPasswordErr("");
+      formValidation.push("Provided passwords don't match!");
+    }
+
+    if (password.length < 8 || confirmPasswrod.length < 8) {
+      formValidation.push("Password is too short!");
+    }
+
+    if (!/[A-Z]/.test(password) || !/[A-Z]/.test(confirmPasswrod)) {
+      formValidation.push("Password needs to have at least one uppercase letter!")
+    }
+
+    if (!/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?\\]/g.test(password) || !/[-’/`~!#*$@_%+=.,^&(){}[\]|;:”<>?\\]/g.test(confirmPasswrod)) {
+      formValidation.push("Password needs to contain at least 1 special character!")
+    }
+
+    if (!/[0-9]/.test(password) || !/[0-9]/.test(confirmPasswrod)) {
+      formValidation.push("Password needs to contain at least one number!")
+    }
+    
+    setPasswordErr(formValidation);
+
+    if (passwordErr?.length == 0) {
       register(email, password);
       navigate('/dashboard');
-      console.log("Passwords are fine")
-      return (
+       return (
         <Navigate to={'/'} />
       )
+      
     }
   }
 
@@ -79,10 +103,6 @@ function Account() {
 
   const otherLoggingOptions = {
     marginTop: "15px",
-  }
-
-  const errorStyle = {
-    color: "red",
   }
 
   return (
@@ -147,10 +167,18 @@ function Account() {
                 <Form.Label>Repeat password</Form.Label>
                 <Form.Control type="password" placeholder="confirm password" onChange={handleConfirmPasswrodChange}/>
               </Form.Group>
-              <div style={errorStyle}>{passwordErr}</div>
+              <div className="reg-errors">{passwordErr && passwordErr.map((err, idx) => {
+                return <p key={idx}>{err}</p>
+              })}</div>
               <Button variant="primary" type="submit" style={loginButtonStyle}>
                 Register
               </Button>
+              <div className="password-req">
+                <p>*Password needs to have at least 8 characters</p>
+                <p>*Password needs to contain at least 1 uppercase character</p>
+                <p>*Password needs to contain at least 1 number</p>
+                <p>*Password needs to contain at least 1 special character</p>
+              </div>
             </Form>
           </Col>
         </Row>

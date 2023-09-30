@@ -1,6 +1,6 @@
 import { useLocation} from "react-router-dom";
 import TopSection from "../components/TopSection";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { RecipeGeneral } from "../types/types";
 import Comments from "../components/Comments";
 
@@ -34,7 +34,7 @@ function RecipeDetails() {
     <>
       <TopSection />
       <Container style={containerStyle}>
-        <h2 className="text-center">{recipe.title}</h2>
+        <h2 className="text-center">{recipe.title} <Button variant="info">Add to favourites</Button></h2>
         <p className="text-center">
           <b>Health score: </b><span style={nutritionStyle}>{recipe.healthScore}</span>
           <b> Ready in (minutes): </b>  <span style={nutritionStyle}>{recipe.readyInMinutes}</span>
