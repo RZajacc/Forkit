@@ -26,7 +26,6 @@ const cardStyle = {
 
 
 function RecipeCardDashboard({ recipe }: Props) {
-  console.log(recipe)
   return (
     <Col key={recipe.recipeID}>
       <Card style={cardStyle}>

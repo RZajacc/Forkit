@@ -44,7 +44,6 @@ function DashboardFavs() {
                 </Row>
                 <Row xs={2} md={4} className="g-4">
                     {userFavs && userFavs.map((recipe) => {
-                        console.log(recipe)
                         return <RecipeCardDashboard recipe={recipe} key={recipe.recipeID} />
                     })}
                 </Row>
