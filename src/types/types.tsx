@@ -4,29 +4,29 @@ export interface searchObject {
   searchVal: string,
   dishType: string,
   cuisine: string,
-  dietType:string,
+  dietType: string,
 }
 
 export interface RecipeGeneral {
-    id: number,
-    title: string,
-    image: string,
-    sustainable: boolean,
-    healthScore: number,
-    readyInMinutes: number,
-    servings: number,
-    extendedIngredients: [
-        {
-            original: string,
-            measures: {
-                metric: {
-                    amount: number,
-                    unitShort: string,
-                }
-            }
+  id: number,
+  title: string,
+  image: string,
+  sustainable: boolean,
+  healthScore: number,
+  readyInMinutes: number,
+  servings: number,
+  extendedIngredients: [
+    {
+      original: string,
+      measures: {
+        metric: {
+          amount: number,
+          unitShort: string,
         }
-    ],
-    analyzedInstructions: [
+      }
+    }
+  ],
+  analyzedInstructions: [
     {
       steps: [
         {
@@ -35,19 +35,26 @@ export interface RecipeGeneral {
           length: {
             number: number,
             unit: string,
-            }
+          }
 
         }
       ]
     }
-    ],
+  ],
 }
 
 export interface commentsType {
-    authorID: string,
-    recipeID: number,
-    author: string;
-    date: Timestamp | Date;
-    message: string;
-    picUrl: string;
+  authorID: string,
+  recipeID: number,
+  author: string;
+  date: Timestamp | Date;
+  message: string;
+  picUrl: string;
+}
+
+export interface userFavs {
+  ImageUrl: string,
+  recipeID: number,
+  recipeTitle: string,
+  userID: string,
 }

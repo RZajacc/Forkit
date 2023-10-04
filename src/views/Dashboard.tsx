@@ -9,25 +9,25 @@ import TopSection from "../components/TopSection";
 function Dashboard() {
 
   const [displayToggle, setDisplayToggle] = useState(true);
- 
+
   return (
     <>
-    <TopSection/>
-    <Container className="dashboard-container">
-      <Row className="justify-content-md-center dashboard-content">
-        <Col className="dashboard-top-content" >
-          <Button variant="info" className="dashboard-button" onClick={() => {
-            setDisplayToggle(true)
-          }}>Account details</Button>
-        </Col>
-        <Col className="dashboard-top-content">
-          <Button variant="info" className="dashboard-button" onClick={() => {
-            setDisplayToggle(false)
-          }}>Saved recipes</Button>
-        </Col>
-      </Row>
-      {displayToggle ? <DashboardUser/> : <DashboardFavs/>}
-        
+      <TopSection />
+      <Container className="dashboard-container">
+        <Row className="justify-content-md-center dashboard-content">
+          <Col className="dashboard-top-content" >
+            <Button variant="info" className="dashboard-button" onClick={() => {
+              setDisplayToggle(true)
+            }}>Account details</Button>
+          </Col>
+          <Col className="dashboard-top-content">
+            <Button variant="info" className="dashboard-button" onClick={() => {
+              setDisplayToggle(false)
+            }}>Saved recipes</Button>
+          </Col>
+        </Row>
+        {displayToggle ? <DashboardUser /> : <DashboardFavs />}
+
       </Container>
     </>
   )

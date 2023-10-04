@@ -1,13 +1,9 @@
-import {Card, Col } from "react-bootstrap"
+import { Card, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import { userFavs } from "../types/types"
 
 type Props = {
-  recipe: {
-    id: number,
-    title: string,
-    image: string,
-  },
-  id: number,
+  recipe: userFavs,
 }
 
 const cardTitle = {
@@ -28,14 +24,16 @@ const cardStyle = {
 }
 
 
-function RecipeCardDashboard({recipe, id}: Props) {
+
+function RecipeCardDashboard({ recipe }: Props) {
+  console.log(recipe)
   return (
-    <Col key={id}>
-     <Card style={cardStyle}>
+    <Col key={recipe.recipeID}>
+      <Card style={cardStyle}>
         <Card.Img variant="top" src={recipe.ImageUrl} />
         <Card.Body className="text-center">
           <Card.Title style={cardTitle}>{recipe.recipeTitle}</Card.Title>
-          <Link to={`${id}`} style={linkStyle}>See more details</Link>
+          <Link to={`${recipe.recipeID}`} style={linkStyle}>See more details</Link>
         </Card.Body>
       </Card>
     </Col>

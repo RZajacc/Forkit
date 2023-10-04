@@ -19,7 +19,7 @@ function ErrorPage() {
     const error = useRouteError() as RouteErrorType;
     return (
         <>
-            <TopSection/>
+            <TopSection />
             <Container >
                 <Row className="justify-content-md-center">
                     <Col xs={6}>
@@ -28,14 +28,14 @@ function ErrorPage() {
                         <img src="nothing.jpg" id="nothing-to-see" />
                         <div className="text-center">
                             <LinkContainer to={"/"}>
-                             <a className="btn btn-success" role="button" id="take-me-home-link">Take me to home!</a>
+                                <a className="btn btn-success" role="button" id="take-me-home-link">Take me to home!</a>
                             </LinkContainer>
-                        </div> 
+                        </div>
                     </Col>
                 </Row>
             </Container>
-      </>
-  )
+        </>
+    )
 }
 
 export default ErrorPage

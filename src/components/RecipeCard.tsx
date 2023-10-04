@@ -1,4 +1,4 @@
-import {Card, Col } from "react-bootstrap"
+import { Card, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 type Props = {
@@ -24,14 +24,14 @@ const linkStyle = {
 
 
 
-function RecipeCard({recipe, id}: Props) {
+function RecipeCard({ recipe, id }: Props) {
   return (
     <Col key={id}>
-     <Card>
+      <Card>
         <Card.Img variant="top" src={recipe.image} />
         <Card.Body className="text-center">
           <Card.Title style={cardTitle}>{recipe.title}</Card.Title>
-          <Link to={`${recipe.id}`} style={linkStyle} state={{recipe: recipe}}>See more details</Link>
+          <Link to={`${recipe.id}`} style={linkStyle} state={{ recipe: recipe }}>See more details</Link>
         </Card.Body>
       </Card>
     </Col>

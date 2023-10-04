@@ -1,6 +1,5 @@
 import { Container, Row } from 'react-bootstrap'
 
-type Props = {}
 
 function Footer() {
   return (

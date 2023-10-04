@@ -4,16 +4,16 @@ import { Navigate } from 'react-router-dom';
 import LoadingPage from './LoadingPage';
 
 type ProtectedRouteProps = {
-    children : ReactNode,
+  children: ReactNode,
 }
 
-function ProtectedRoute(props:ProtectedRouteProps) {
+function ProtectedRoute(props: ProtectedRouteProps) {
 
-  const { user, loading } = useContext(AuthContext);  
+  const { user, loading } = useContext(AuthContext);
 
   return (
     <>
-      {loading ? <LoadingPage/> : user ? props.children : <Navigate to="/account" />}
+      {loading ? <LoadingPage /> : user ? props.children : <Navigate to="/account" />}
     </>
   )
 }

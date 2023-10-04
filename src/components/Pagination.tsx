@@ -1,4 +1,4 @@
-import {useState, MouseEvent} from 'react'
+import { useState, MouseEvent } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import "../style/Global.css";
 
@@ -11,16 +11,16 @@ const tt = {
   padding: "7px",
 }
 
-function Pagination({setOffset, offset}: Props) {
-  
+function Pagination({ setOffset, offset }: Props) {
+
   const [counter, setCounter] = useState<number>(1);
- 
-  
+
+
   const moveToPage = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    
-   const buttonElement = e.target as HTMLButtonElement;
-   const buttonValue = buttonElement.innerHTML;
-    
+
+    const buttonElement = e.target as HTMLButtonElement;
+    const buttonValue = buttonElement.innerHTML;
+
     if (offset === 0 && buttonValue === "Next") {
       setOffset(offset + 6);
       setCounter(counter + 1);
@@ -37,13 +37,13 @@ function Pagination({setOffset, offset}: Props) {
       setCounter(counter - 1);
     }
   }
-  
+
   return (
     <Container className='recipe-pagination'>
       <Row className="justify-content-md-center">
         <Col xs="12" sm="11" md="8" lg="6" xl="5" xxl="5">
-          <Button  disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Previous</Button>
-          <strong style={tt}>You are currently on page:</strong> <span  style={tt} className="target-page">{counter}</span>
+          <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Previous</Button>
+          <strong style={tt}>You are currently on page:</strong> <span style={tt} className="target-page">{counter}</span>
           <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Next</Button>
         </Col>
       </Row>

@@ -13,7 +13,7 @@ import Home from "./views/Home";
 import ErrorPage from "./views/ErrorPage";
 import Footer from "./components/Footer";
 import RecipeDetails from "./views/RecipeDetails";
-import { AuthContextProvider} from "./context/AuthContext";
+import { AuthContextProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./views/Dashboard";
 import Account from "./views/Account";
@@ -24,31 +24,31 @@ function App() {
 
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Root />} errorElement={<ErrorPage/>} >
-        <Route index element={<Home/>} />
-        <Route path="recipes" element={<RecipesView/>} />
+      <Route path="/" element={<Root />} errorElement={<ErrorPage />} >
+        <Route index element={<Home />} />
+        <Route path="recipes" element={<RecipesView />} />
         <Route path="recipes/:id" element={
           <ProtectedRoute>
             <RecipeDetails />
-          </ProtectedRoute>  
+          </ProtectedRoute>
         } />
         <Route path="dashboard" element={
           <ProtectedRoute>
-            <Dashboard/>
+            <Dashboard />
           </ProtectedRoute>
         } />
         <Route path="dashboard/:id" element={
           <ProtectedRoute>
-            <FavRecipeDetails/>
+            <FavRecipeDetails />
           </ProtectedRoute>
         } />
 
-        
+
         <Route path="contact" element={<Contact />} />
         <Route path="account" element={<Account />} />
       </Route>
     )
-  );  
+  );
 
   return (
     <>
@@ -62,9 +62,9 @@ function App() {
 const Root = () => {
   return (
     <>
-      <AppNav/>
+      <AppNav />
       <Outlet />
-      <Footer/>
+      <Footer />
     </>
   )
 }

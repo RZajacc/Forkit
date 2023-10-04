@@ -1,34 +1,34 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
-import {User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider} from 'firebase/auth'
+import { User, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, GithubAuthProvider } from 'firebase/auth'
 import { auth } from "../config/firebaseConfig";
 
 // ? TYPES
 interface AuthContextType {
-    user: User | null,
-    setUser: (user: User) => void,
-    register: (email:string, password:string) => void,
-    loginEmail: (email: string, password: string) => void,
-    loginGoogle: () => void,
-    loginGithub: () => void,
-    loginFacebook: () => void,
-    logout: () => void,
-    loading: boolean,
+  user: User | null,
+  setUser: (user: User) => void,
+  register: (email: string, password: string) => void,
+  loginEmail: (email: string, password: string) => void,
+  loginGoogle: () => void,
+  loginGithub: () => void,
+  loginFacebook: () => void,
+  logout: () => void,
+  loading: boolean,
 }
 
 const AuthInitContext = {
-    user: null,
-    setUser: () => console.log("user not yet defined"),
-    register: () => console.log("context not initialized"),
-    loginEmail: () => console.log("User state not yet defined"),
-    loginGoogle: () => console.log("User state not yet defined"),
-    loginGithub: () => console.log("User state not yet defined"),
-    loginFacebook: () => console.log("User state not yet defined"),
-    logout: () => console.log("User state not yet defined"),
-    loading: true,
+  user: null,
+  setUser: () => console.log("user not yet defined"),
+  register: () => console.log("context not initialized"),
+  loginEmail: () => console.log("User state not yet defined"),
+  loginGoogle: () => console.log("User state not yet defined"),
+  loginGithub: () => console.log("User state not yet defined"),
+  loginFacebook: () => console.log("User state not yet defined"),
+  logout: () => console.log("User state not yet defined"),
+  loading: true,
 }
 
 interface AuthContextProviderProps {
-    children: ReactNode,
+  children: ReactNode,
 }
 
 
@@ -38,8 +38,8 @@ export const AuthContext = createContext<AuthContextType>(AuthInitContext);
 
 // ? 2- Define content of our store
 
-export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
-    
+export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
+
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -56,9 +56,9 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       console.log("error", error);
     }
   }
-  
+
   const loginEmail = async (email: string, password: string) => {
-      
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const loggedUser = userCredential.user;
@@ -69,7 +69,7 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   }
 
   const loginGoogle = async () => {
-     
+
     try {
       const googleAuth = await signInWithPopup(auth, providerGoogle);
       // const credential = GoogleAuthProvider.credentialFromResult(googleAuth);
@@ -85,44 +85,37 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
       const gitHubAuth = await signInWithPopup(auth, providerGithub);
       setUser(gitHubAuth.user);
       console.log(gitHubAuth.user)
-      // const credential = GithubAuthProvider.credentialFromResult(gitHubAuth);
-      // const token = credential.accessToken;
       console.log("Github login success");
     } catch (error) {
       console.log(error);
     }
   }
 
- 
+
   const loginFacebook = async () => {
     try {
       const facebookAuth = await signInWithPopup(auth, providerFacebook);
       setUser(facebookAuth.user);
-      // const credential = FacebookAuthProvider.credentialFromResult(facebookAuth);
-      // const accessToken = credential.accessToken;
       console.log("Facebook login success");
     } catch (error) {
       console.log(error)
     }
   }
-  
-  
+
+
   const logout = () => {
     signOut(auth).then(() => {
       setUser(null);
-      // localStorage.removeItem('user');
     }).catch((error) => {
       console.log("Error :>>", error)
     });
-    
+
   }
 
 
   const checkIfUserIsActive = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // const uid = user.uid;
-        // localStorage.setItem('user', JSON.stringify(user));
         setUser(user);
         setLoading(false);
       } else {
@@ -135,12 +128,12 @@ export const AuthContextProvider = ({children}: AuthContextProviderProps) => {
   useEffect(() => {
     checkIfUserIsActive();
   }, [loading])
-  
-  
 
-    return (
-        <AuthContext.Provider value={{user, setUser, loginEmail, loginGoogle, loginGithub, loginFacebook, logout, register, loading}}>
-            {children}
-        </AuthContext.Provider>
-    )
+
+
+  return (
+    <AuthContext.Provider value={{ user, setUser, loginEmail, loginGoogle, loginGithub, loginFacebook, logout, register, loading }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }

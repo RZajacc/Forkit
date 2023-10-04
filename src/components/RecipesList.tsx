@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import RecipeCard from "./RecipeCard";
 import { RecipeGeneral, searchObject } from "../types/types";
 
@@ -7,11 +7,11 @@ import { RecipeGeneral, searchObject } from "../types/types";
 interface Props {
   searchObj: searchObject,
   offset: number,
-  setOffset: (offset: number)=> void,
+  setOffset: (offset: number) => void,
 }
 
-function RecipesList({searchObj,offset, setOffset} : Props) {
-  
+function RecipesList({ searchObj, offset, setOffset }: Props) {
+
   // * ------------ DEFINE USESTATES -------------------------------
   const [recipesData, setRecipesData] = useState<RecipeGeneral[]>([
     {
@@ -43,16 +43,16 @@ function RecipesList({searchObj,offset, setOffset} : Props) {
                 number: 0,
                 unit: '',
               }
-           }
-         ]
-       }
+            }
+          ]
+        }
       ]
     }
   ])
   const [totalResults, setTotalResults] = useState<number>(0)
 
   const fetchRecipesList = async () => {
-    
+
     // * Prepare custom queries if they are selected
     const query = searchObj.searchVal != '' ? `&query=${searchObj.searchVal}` : '';
     const dishType = searchObj.dishType != '' ? `&type=${searchObj.dishType}` : '';
@@ -60,12 +60,12 @@ function RecipesList({searchObj,offset, setOffset} : Props) {
     const dietType = searchObj.dietType != '' ? `&diet=${searchObj.dietType}` : '';
 
     // * Prepare link
-    // const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
-    const apiKey = "df7b0368786144ddad91486133f4e77c";
+    const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
+    // const apiKey = "df7b0368786144ddad91486133f4e77c";
     const number = 6;
     const baseUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=${number}&offset=${offset}&addRecipeInformation=true&fillIngredients=true`;
-    
-    
+
+
     const url = `${baseUrl}${query}${dishType}${cuisineType}${dietType}`;
 
 
@@ -82,27 +82,27 @@ function RecipesList({searchObj,offset, setOffset} : Props) {
       setRecipesData(recipeData);
     } catch (error) {
       console.log("Error --->", error);
-   }
-   }
-   
+    }
+  }
+
   useEffect(() => {
-     fetchRecipesList()   
+    fetchRecipesList();
   }, [searchObj, offset])
-  
- 
-  
+
+
+
   return (
     <>
       <Container id="recipes-list-container">
         <div className="text-center">
-          <p>Total amount or recipes found: <strong>{ totalResults }</strong></p>
+          <p>Total amount or recipes found: <strong>{totalResults}</strong></p>
         </div>
         <Row xs={2} md={3} className="g-4">
           {recipesData && recipesData.map((recipe) => {
-            return <RecipeCard recipe={recipe} id={recipe.id} key={recipe.id}/>
-        })}
+            return <RecipeCard recipe={recipe} id={recipe.id} key={recipe.id} />
+          })}
         </Row>
-        
+
       </Container>
     </>
   )

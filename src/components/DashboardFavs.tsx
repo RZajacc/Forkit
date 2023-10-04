@@ -4,28 +4,29 @@ import { db } from "../config/firebaseConfig";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import RecipeCardDashboard from "./RecipeCardDashboard";
+import { userFavs } from "../types/types";
+
 
 
 function DashboardFavs() {
 
     const { user } = useContext(AuthContext);
-    const [userFavs, setUserFavs] = useState([])
-      
+    const [userFavs, setUserFavs] = useState<userFavs[] | null>(null)
+
     // * Get favourites with live update
     const getFavouritesLive = () => {
         const q = query(collection(db, "favourites"), where("userID", "==", user?.uid));
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-          // const comments: commentsType[] = [];
-          const userFavs = [];
-        querySnapshot.forEach((doc) => {
-            userFavs.push(doc.data());
-        });
-        setUserFavs(userFavs);
+        onSnapshot(q, (querySnapshot) => {
+            const userFavs: userFavs[] = [];
+            querySnapshot.forEach((doc) => {
+                userFavs.push(doc.data() as userFavs);
+            });
+            setUserFavs(userFavs);
         });
     }
 
     useEffect(() => {
-        getFavouritesLive();      
+        getFavouritesLive();
     }, [])
 
 
@@ -33,23 +34,23 @@ function DashboardFavs() {
         marginBottom: "40px",
     }
 
-  return (
-      <>
-          <Container>
+    return (
+        <>
+            <Container>
                 <Row className="justify-content-md-center" >
-                  <Col xs lg="5">
-                      {userFavs.length == 0 ?  <h4 style={noFavsText}>...No favourites yet...</h4> : ''}
-                  </Col>
-              </Row>
-               <Row xs={2} md={4} className="g-4">
-                  {userFavs && userFavs.map((recipe) => {
-                    console.log(recipe)
-                    return <RecipeCardDashboard recipe={recipe} id={recipe.recipeID} key={recipe.recipeID}/>
-                })}
+                    <Col xs lg="5">
+                        {userFavs ? <h4 style={noFavsText}>...No favourites yet...</h4> : ''}
+                    </Col>
                 </Row>
-        </Container>
-      </>
-  )
+                <Row xs={2} md={4} className="g-4">
+                    {userFavs && userFavs.map((recipe) => {
+                        console.log(recipe)
+                        return <RecipeCardDashboard recipe={recipe} key={recipe.recipeID} />
+                    })}
+                </Row>
+            </Container>
+        </>
+    )
 }
 
 export default DashboardFavs

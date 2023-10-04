@@ -7,12 +7,12 @@ interface searchObject {
   searchVal: string,
   dishType: string,
   cuisine: string,
-  dietType:string,
+  dietType: string,
 }
 
 
 function RecipesView() {
-  
+
   const [offset, setOffset] = useState<number>(0)
   const [searchObj, setSearchObj] = useState<searchObject>({
     searchVal: '',
@@ -20,12 +20,12 @@ function RecipesView() {
     cuisine: '',
     dietType: '',
   })
-  
-    return (
+
+  return (
     <>
-      <SearchBar setSearchObj={setSearchObj}/>
-        <RecipesList searchObj={searchObj} offset={offset} setOffset={setOffset} />
-        <Pagination setOffset={setOffset} offset={offset } />
+      <SearchBar setSearchObj={setSearchObj} />
+      <RecipesList searchObj={searchObj} offset={offset} setOffset={setOffset} />
+      <Pagination setOffset={setOffset} offset={offset} />
     </>
   )
 }
