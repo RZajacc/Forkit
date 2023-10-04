@@ -8,7 +8,6 @@ type Props = {
 }
 
 const tt = {
-  // margin: "5px"
   padding: "7px",
 }
 
