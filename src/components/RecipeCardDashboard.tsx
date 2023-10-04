@@ -35,7 +35,7 @@ function RecipeCardDashboard({recipe, id}: Props) {
         <Card.Img variant="top" src={recipe.ImageUrl} />
         <Card.Body className="text-center">
           <Card.Title style={cardTitle}>{recipe.recipeTitle}</Card.Title>
-          <Link to={`${recipe.id}`} style={linkStyle}>See more details</Link>
+          <Link to={`${id}`} style={linkStyle}>See more details</Link>
         </Card.Body>
       </Card>
     </Col>

@@ -17,6 +17,7 @@ import { AuthContextProvider} from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Dashboard from "./views/Dashboard";
 import Account from "./views/Account";
+import FavRecipeDetails from "./views/FavRecipeDetails";
 
 
 function App() {
@@ -35,7 +36,14 @@ function App() {
           <ProtectedRoute>
             <Dashboard/>
           </ProtectedRoute>
-        }/>
+        } />
+        <Route path="dashboard/:id" element={
+          <ProtectedRoute>
+            <FavRecipeDetails/>
+          </ProtectedRoute>
+        } />
+
+        
         <Route path="contact" element={<Contact />} />
         <Route path="account" element={<Account />} />
       </Route>

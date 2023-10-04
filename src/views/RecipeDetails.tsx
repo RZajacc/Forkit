@@ -76,6 +76,8 @@ function RecipeDetails() {
     useEffect(() => {
         getFavouritesLive();      
     }, [])
+  
+    console.log("Im in details!!!")
 
   return (
     <>
