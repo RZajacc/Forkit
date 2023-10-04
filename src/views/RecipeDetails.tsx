@@ -3,7 +3,7 @@ import TopSection from "../components/TopSection";
 import { Button, Container } from "react-bootstrap";
 import { RecipeGeneral } from "../types/types";
 import Comments from "../components/Comments";
-import { collection, addDoc, query, where, onSnapshot } from "firebase/firestore"; 
+import { collection, addDoc, query, where, onSnapshot, deleteDoc, doc } from "firebase/firestore"; 
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../config/firebaseConfig";
@@ -18,6 +18,7 @@ function RecipeDetails() {
   const { recipe } = location.state as LocationState;
   const { user } = useContext(AuthContext);
   const [favs, setFavs] = useState([]);
+  const [favID, setFavID] = useState(null);
   
   
   // * ------ ELEMENTS STYLES -------------
@@ -48,9 +49,14 @@ function RecipeDetails() {
       ImageUrl: recipe.image,
 
     }
-    // Add a new document with a generated id.
-    const docRef = await addDoc(collection(db, "favourites"), fav);
-    console.log(docRef);
+
+    if (favID) {
+      await deleteDoc(doc(db, "favourites", favID));
+      setFavID(null);
+    }else {
+      // Add a new document with a generated id.
+      const docRef = await addDoc(collection(db, "favourites"), fav);
+    }
   }
 
   // * Get favourites with live update
@@ -60,7 +66,8 @@ function RecipeDetails() {
           // const comments: commentsType[] = [];
           const favs = [];
         querySnapshot.forEach((doc) => {
-            favs.push(doc.data());
+          favs.push(doc.data());
+          setFavID(doc.id);
         });
         setFavs(favs);
         });
@@ -88,10 +95,6 @@ function RecipeDetails() {
           )}
         </h2>
 
-          {/* <Button variant="info" onClick={handleAddFavourite}>
-            <img src="../public/Empty_Star.png" alt="empty star" style={star} />
-            Add to favourites
-          </Button></h2> */}
         <p className="text-center">
           <b>Health score: </b><span style={nutritionStyle}>{recipe.healthScore}</span>
           <b> Ready in (minutes): </b>  <span style={nutritionStyle}>{recipe.readyInMinutes}</span>
