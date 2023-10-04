@@ -7,6 +7,11 @@ type Props = {
   offset: number,
 }
 
+const tt = {
+  // margin: "5px"
+  padding: "7px",
+}
+
 function Pagination({setOffset, offset}: Props) {
   
   const [counter, setCounter] = useState<number>(1);
@@ -36,13 +41,12 @@ function Pagination({setOffset, offset}: Props) {
   
   return (
     <Container className='recipe-pagination'>
-      <Row className="justify-content-md-around">
-        <Col xs={1} >
+      <Row className="justify-content-md-center">
+        <Col xs="12" sm="11" md="8" lg="6" xl="5" xxl="5">
           <Button  disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Previous</Button>
-        </Col >
-        <Col xs={3}><strong>You are currently on page:</strong> <span className="target-page">{counter}</span></Col>
-        <Col xs={1}>
-          <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Next</Button></Col>
+          <strong style={tt}>You are currently on page:</strong> <span  style={tt} className="target-page">{counter}</span>
+          <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Next</Button>
+        </Col>
       </Row>
     </Container>
   )

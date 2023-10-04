@@ -11,7 +11,6 @@ function Account() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPasswrod, setConfirmPasswrod] = useState("")
-  // const [passwordErr, setPasswordErr] = useState("")
   const [passwordErr, setPasswordErr] = useState<string[] | null>(null);
   const { loginEmail, loginGoogle, loginGithub, loginFacebook, register } = useContext(AuthContext);
   const navigate = useNavigate();
