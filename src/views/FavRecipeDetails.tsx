@@ -1,16 +1,22 @@
 import { useParams} from "react-router-dom";
 import TopSection from "../components/TopSection";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { RecipeGeneral } from "../types/types";
 import Comments from "../components/Comments";
-import {useEffect, useState } from "react";
+import {useEffect, useState, useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { addDoc, collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
 
 
 function FavRecipeDetails() {
 
   const params = useParams();
-  const recipeID = parseInt(params.id);
-  const [recipeData, setRecipeData] = useState<RecipeGeneral | null>(null)
+  const recipeID = parseInt(params.id!);
+  const [recipeData, setRecipeData] = useState<RecipeGeneral | null>(null);
+  const { user } = useContext(AuthContext);
+  const [favs, setFavs] = useState([]);
+  const [favID, setFavID] = useState(null);
 
   console.log(typeof recipeID);
   
@@ -27,6 +33,10 @@ function FavRecipeDetails() {
 
   const containerStyle = {
     marginBottom: '75px',
+  }
+
+   const star = {
+    width: "25px",
   }
 
 
@@ -50,17 +60,65 @@ function FavRecipeDetails() {
       console.log("Error --->", error);
    }
   }
+
+   // *Adding recipe to favourites
+  const handleAddFavourite = async () => {
+    const fav = {
+      userID: user?.uid,
+      recipeID: recipeID,
+      recipeTitle: recipeData?.title,
+      ImageUrl: recipeData?.image,
+
+    }
+
+      if (favID) {
+        await deleteDoc(doc(db, "favourites", favID));
+        setFavID(null);
+      }else {
+        // Add a new document with a generated id.
+        const docRef = await addDoc(collection(db, "favourites"), fav);
+      }
+    }
+
+    // * Get favourites with live update
+    const getFavouritesLive = () => {
+        const q = query(collection(db, "favourites"), where("userID", "==", user?.uid), where("recipeID", "==", recipeID));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          // const comments: commentsType[] = [];
+          const favs = [];
+        querySnapshot.forEach((doc) => {
+          favs.push(doc.data());
+          setFavID(doc.id);
+        });
+        setFavs(favs);
+        });
+    }
   
   useEffect(() => {
-    fetchSingleRecipe()
+    fetchSingleRecipe();
+    getFavouritesLive();
+    
   }, [])
   
+
 
   return (
     <>
       <TopSection />
       <Container style={containerStyle}>
-        <h2 className="text-center">{recipeData?.title}</h2>
+        <h2 className="text-center">{recipeData?.title}
+          {favs.length != 0 ? (
+            <Button variant="info" onClick={handleAddFavourite}>
+              <img src="../public/Full_Star.png" alt="empty star" style={star} />
+              Add to favourites
+            </Button>
+          ) : (
+            <Button variant="info" onClick={handleAddFavourite}>
+              <img src="../public/Empty_Star.png" alt="empty star" style={star} />
+              Add to favourites
+            </Button>
+          )}
+        </h2>
 
         <p className="text-center">
           <b>Health score: </b><span style={nutritionStyle}>{recipeData?.healthScore}</span>
