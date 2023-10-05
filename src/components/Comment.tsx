@@ -11,7 +11,6 @@ type Props = {
   comment: commentsType,
 }
 
-
 function Comment({ comment }: Props) {
 
   const { user } = useContext(AuthContext);

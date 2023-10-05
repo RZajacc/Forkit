@@ -3,7 +3,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import "../style/Global.css";
 
 
-
 function LoadingPage() {
   return (
     <Container className="loadingContainer">

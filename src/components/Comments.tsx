@@ -8,7 +8,7 @@ import "../style/Comment.css"
 import { AuthContext } from "../context/AuthContext";
 
 
-interface Props {
+type Props = {
     recipeId: number;
 }
 
@@ -18,6 +18,7 @@ function Comments({ recipeId }: Props) {
     const [comments, setComments] = useState<commentsType[] | null>(null);
     const [newMessage, setNewMessage] = useState("");
     const { user } = useContext(AuthContext)
+
 
     const handleMessageInput = (e: ChangeEvent<HTMLInputElement>) => {
         setNewMessage(e.target.value);
@@ -34,7 +35,6 @@ function Comments({ recipeId }: Props) {
             message: newMessage,
             date: new Date(),
         }
-
         // Add a new document with a generated id.
         await addDoc(collection(db, "Comments"), newChatMsg);
     }

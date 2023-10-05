@@ -12,7 +12,6 @@ function Pagination({ setOffset, offset }: Props) {
 
   const [counter, setCounter] = useState<number>(1);
 
-
   const moveToPage = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
 
     const buttonElement = e.target as HTMLButtonElement;

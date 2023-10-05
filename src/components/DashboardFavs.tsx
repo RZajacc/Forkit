@@ -8,7 +8,6 @@ import { userFavs } from "../types/types";
 import "../style/Dashboard.css";
 
 
-
 function DashboardFavs() {
 
     const { user } = useContext(AuthContext);

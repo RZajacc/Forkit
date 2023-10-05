@@ -3,7 +3,6 @@ import { Row } from "react-bootstrap"
 import { AuthContext } from "../context/AuthContext"
 
 
-
 function DashboardUser() {
 
   const { user } = useContext(AuthContext);
