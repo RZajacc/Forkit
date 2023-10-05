@@ -1,26 +1,18 @@
 import { Col, Container, Row } from 'react-bootstrap'
 import Spinner from 'react-bootstrap/Spinner';
+import "../style/Global.css";
 
-
-const loadingContainer = {
-  marginTop: "6%",
-}
-
-const spinnerStyle = {
-  width: "125px",
-  height: "125px",
-}
 
 
 function LoadingPage() {
   return (
-    <Container style={loadingContainer}>
+    <Container className="loadingContainer">
       <Row className='justify-content-md-center'>
         <Col xs lg="5">
           <h1>Loading... Please wait...</h1>
           <Row className='justify-content-md-center'>
             <Col xs lg="5">
-              <Spinner animation="border" variant="success" style={spinnerStyle} />
+              <Spinner animation="border" variant="success" className="spinnerStyle" />
             </Col>
           </Row>
         </Col>

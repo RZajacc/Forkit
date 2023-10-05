@@ -84,8 +84,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     try {
       const gitHubAuth = await signInWithPopup(auth, providerGithub);
       setUser(gitHubAuth.user);
-      console.log(gitHubAuth.user)
-      console.log("Github login success");
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +94,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     try {
       const facebookAuth = await signInWithPopup(auth, providerFacebook);
       setUser(facebookAuth.user);
-      console.log("Facebook login success");
     } catch (error) {
       console.log(error)
     }
@@ -119,7 +116,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
         setUser(user);
         setLoading(false);
       } else {
-        console.log("User is logged out");
         setLoading(false);
       }
     });

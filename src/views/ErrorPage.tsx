@@ -1,19 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap"
 import { useRouteError } from "react-router-dom"
 import { LinkContainer } from "react-router-bootstrap"
-
 import TopSection from "../components/TopSection"
+import "../style/Global.css"
+import { RouteErrorType } from "../types/types"
 
-import "../style/ErrorPage.css"
-
-interface RouteErrorType {
-    data: string,
-    error: {
-        message: string,
-    }
-    status: number,
-    statusText: string,
-}
 
 function ErrorPage() {
     const error = useRouteError() as RouteErrorType;

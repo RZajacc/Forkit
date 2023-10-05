@@ -86,7 +86,7 @@ function RecipeDetails() {
       <TopSection />
       <Container style={containerStyle}>
         <h2 className="text-center">{recipe.title}
-          {favs ? (
+          {favs?.length != 0 ? (
             <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
               <img src="../public/Full_Star.png" alt="empty star" style={star} />
               Add to favourites

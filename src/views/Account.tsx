@@ -46,8 +46,6 @@ function Account() {
     navigate('/dashboard');
   };
 
-  console.log(/[A-Z]/.test('123'));
-
   const handleRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formValidation: string[] = [];
@@ -84,29 +82,13 @@ function Account() {
     }
   };
 
-  const colStyle = {
-    border: '2px solid gray',
-    borderRadius: '5%',
-    padding: '30px',
-    margin: '20px',
-  };
-
-  const loginButtonStyle = {
-    width: '100%',
-    margin: '5px',
-    border: '1px solid black',
-  };
-
-  const otherLoggingOptions = {
-    marginTop: '15px',
-  };
 
   return (
     <>
       <TopSection />
       <Container>
         <Row className='justify-content-md-center'>
-          <Col xs lg='4' style={colStyle}>
+          <Col xs lg='4' className="colStyle">
             <Form onSubmit={handleLogin} className='text-center'>
               <h5>If you already have an account simply log in using preferred option:</h5>
               <Form.Group className='mb-3' controlId='login-email'>
@@ -125,30 +107,30 @@ function Account() {
                   onChange={handlePasswordChange}
                 />
               </Form.Group>
-              <Button variant='primary' type='submit' style={loginButtonStyle}>
+              <Button variant='primary' type='submit' className="loginButtonStyle">
                 Login
               </Button>
             </Form>
 
-            <div style={otherLoggingOptions}>
+            <div className="otherLoggingOptions">
               <h5 className='text-center'>Or select one of alternative logging options:</h5>
-              <Button variant='light' onClick={handleLoginGoogle} style={loginButtonStyle}>
+              <Button variant='light' onClick={handleLoginGoogle} className="loginButtonStyle">
                 <img src='public\googleIcon.svg' /> Log in with Google
               </Button>
 
-              <Button variant='light' onClick={handleGithubLogin} style={loginButtonStyle}>
+              <Button variant='light' onClick={handleGithubLogin} className="loginButtonStyle">
                 <img src='public/github.png' width={'45px'} />
                 Login in with Github
               </Button>
 
-              <Button variant='light' onClick={handleFacebookLogin} style={loginButtonStyle}>
+              <Button variant='light' onClick={handleFacebookLogin} className="loginButtonStyle">
                 <img src='public/facebook.png' width={'45px'} />
                 Login in with Facebook
               </Button>
             </div>
           </Col>
 
-          <Col xs lg='4' style={colStyle}>
+          <Col xs lg='4' className="colStyle">
             <Form onSubmit={handleRegister} className='text-center'>
               <h5>If you don't have an account yet please use this register form:</h5>
               <Form.Group className='mb-3' controlId='register-email'>
@@ -185,7 +167,7 @@ function Account() {
                     return <p key={idx}>{err}</p>;
                   })}
               </div>
-              <Button variant='primary' type='submit' style={loginButtonStyle}>
+              <Button variant='primary' type='submit' className="loginButtonStyle">
                 Register
               </Button>
               <div className='password-req'>

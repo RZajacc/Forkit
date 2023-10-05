@@ -1,17 +1,13 @@
 import { Container, Row, Col, InputGroup, Form, Button } from "react-bootstrap"
 import { ChangeEvent, useState } from "react";
-
-import "../style/SearchBar.css"
 import { searchObject } from "../types/types";
-
-
+import "../style/SearchBar.css"
 
 interface Props {
   setSearchObj: (searchObj: searchObject) => void,
 }
 
 function SearchBar({ setSearchObj }: Props) {
-
 
   // * Values to prefill select boxes
   const availableCuisines = ['African', 'Asian', 'American', 'British', 'Cajun',

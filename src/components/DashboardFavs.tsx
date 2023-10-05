@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import RecipeCardDashboard from "./RecipeCardDashboard";
 import { userFavs } from "../types/types";
+import "../style/Dashboard.css";
 
 
 
@@ -30,16 +31,12 @@ function DashboardFavs() {
     }, [])
 
 
-    const noFavsText = {
-        marginBottom: "40px",
-    }
-
     return (
         <>
             <Container>
                 <Row className="justify-content-md-center" >
                     <Col xs lg="5">
-                        {userFavs ? <h4 style={noFavsText}>...No favourites yet...</h4> : ''}
+                        {userFavs?.length == 0 ? <h4 className="noFavsText">...No favourites yet...</h4> : ''}
                     </Col>
                 </Row>
                 <Row xs={2} md={4} className="g-4">

@@ -17,3 +17,20 @@
 .reg-errors > * {
     margin: 5px;
 }
+
+.colStyle {
+    border: 2px solid gray;
+    border-radius: 5%;
+    padding: 30px;
+    margin: 20px;
+}
+
+.loginButtonStyle {
+    width: 100%;
+    margin: 5px;
+    border: 1px solid black;
+}
+
+.otherLoggingOptions {
+    margin-top: 15px;
+}

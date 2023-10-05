@@ -2,10 +2,10 @@ import { Button, Col, Row } from 'react-bootstrap'
 import { commentsType } from '../types/types'
 import { formatDate } from '../utils/Utils'
 import { MouseEvent, useContext } from 'react'
-import "../style/Comment.css"
 import { AuthContext } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../config/firebaseConfig'
+import "../style/Comment.css"
 
 type Props = {
   comment: commentsType,

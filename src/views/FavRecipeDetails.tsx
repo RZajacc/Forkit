@@ -19,30 +19,6 @@ function FavRecipeDetails() {
   const [favID, setFavID] = useState<string | null>(null);
 
 
-
-  // * ------ ELEMENTS STYLES -------------
-  const nutritionStyle = {
-    border: "1px solid black",
-    padding: '3px',
-    borderRadius: '42%',
-  }
-
-  const sectionsStyle = {
-    marginTop: '20px',
-  }
-
-  const containerStyle = {
-    marginBottom: '75px',
-  }
-
-  const star = {
-    width: "25px",
-  }
-
-  const favsButton = {
-    marginLeft: "15px",
-  }
-
   const fetchSingleRecipe = async () => {
 
     // * Prepare link
@@ -98,7 +74,6 @@ function FavRecipeDetails() {
   useEffect(() => {
     fetchSingleRecipe();
     getFavouritesLive();
-
   }, [])
 
 
@@ -106,33 +81,33 @@ function FavRecipeDetails() {
   return (
     <>
       <TopSection />
-      <Container style={containerStyle}>
+      <Container className="containerStyle">
         <h2 className="text-center">{recipeData?.title}
-          {favs ? (
-            <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Full_Star.png" alt="empty star" style={star} />
+          {favs?.length != 0 ? (
+            <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
+              <img src="../public/Full_Star.png" alt="empty star" className="star" />
               Add to favourites
             </Button>
           ) : (
-            <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Empty_Star.png" alt="empty star" style={star} />
+            <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
+              <img src="../public/Empty_Star.png" alt="empty star" className="star" />
               Add to favourites
             </Button>
           )}
         </h2>
 
         <p className="text-center">
-          <b>Health score: </b><span style={nutritionStyle}>{recipeData?.healthScore}</span>
-          <b> Ready in (minutes): </b>  <span style={nutritionStyle}>{recipeData?.readyInMinutes}</span>
-          <b> Servings: </b>  <span style={nutritionStyle}>{recipeData?.servings}</span>
-          <b> Sustainable: </b>  <span style={nutritionStyle}>{recipeData?.sustainable ? 'Yes' : 'No'}</span>
+          <b>Health score: </b><span className="nutritionStyle">{recipeData?.healthScore}</span>
+          <b> Ready in (minutes): </b>  <span className="nutritionStyle">{recipeData?.readyInMinutes}</span>
+          <b> Servings: </b>  <span className="nutritionStyle">{recipeData?.servings}</span>
+          <b> Sustainable: </b>  <span className="nutritionStyle">{recipeData?.sustainable ? 'Yes' : 'No'}</span>
         </p>
 
         <div className="text-center">
-          <img src={recipeData?.image} width={"450px"} />
+          <img src={recipeData?.image} className="recipe-image" />
         </div>
 
-        <h4 className="text-center" style={sectionsStyle}>Ingredient list:</h4>
+        <h4 className="text-center sectionStyle">Ingredient list:</h4>
         <ul>
           {recipeData?.extendedIngredients.map((ingredient, indRec) => {
             return (
@@ -141,7 +116,7 @@ function FavRecipeDetails() {
           })}
         </ul>
 
-        <h4 className="text-center" style={sectionsStyle}>Instructions: </h4>
+        <h4 className="text-center sectionStyle">Instructions: </h4>
         <ol>
           {recipeData?.analyzedInstructions[0].steps.map((step, idx) => {
             return <li key={idx}>{step.step}</li>

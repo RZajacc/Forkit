@@ -1,27 +1,12 @@
 import { Card, Col } from "react-bootstrap"
 import { Link } from "react-router-dom"
+import "../style/Recipes.css"
+import { RecipeGeneral } from "../types/types"
 
 type Props = {
-  recipe: {
-    id: number,
-    title: string,
-    image: string,
-  },
+  recipe: RecipeGeneral,
   id: number,
 }
-
-const cardTitle = {
-  fontSize: "1.0rem",
-}
-
-const linkStyle = {
-  textDecoration: "none",
-  color: "white",
-  backgroundColor: '#6FC643',
-  borderRadius: '7%',
-  padding: "5px",
-}
-
 
 
 function RecipeCard({ recipe, id }: Props) {
@@ -30,8 +15,8 @@ function RecipeCard({ recipe, id }: Props) {
       <Card>
         <Card.Img variant="top" src={recipe.image} />
         <Card.Body className="text-center">
-          <Card.Title style={cardTitle}>{recipe.title}</Card.Title>
-          <Link to={`${recipe.id}`} style={linkStyle} state={{ recipe: recipe }}>See more details</Link>
+          <Card.Title className="cardTitle">{recipe.title}</Card.Title>
+          <Link to={`${recipe.id}`} className="linkStyle" state={{ recipe: recipe }}>See more details</Link>
         </Card.Body>
       </Card>
     </Col>

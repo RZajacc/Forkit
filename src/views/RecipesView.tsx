@@ -2,13 +2,7 @@ import { useState } from "react";
 import SearchBar from '../components/SearchBar'
 import RecipesList from '../components/RecipesList'
 import Pagination from "../components/Pagination";
-
-interface searchObject {
-  searchVal: string,
-  dishType: string,
-  cuisine: string,
-  dietType: string,
-}
+import { searchObject } from "../types/types";
 
 
 function RecipesView() {

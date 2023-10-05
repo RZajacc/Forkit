@@ -58,3 +58,19 @@ export interface userFavs {
   recipeTitle: string,
   userID: string,
 }
+
+export interface RouteErrorType {
+  data: string,
+  error: {
+    message: string,
+  }
+  status: number,
+  statusText: string,
+}
+
+export interface searchObject {
+  searchVal: string,
+  dishType: string,
+  cuisine: string,
+  dietType: string,
+}

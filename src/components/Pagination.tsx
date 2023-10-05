@@ -7,9 +7,6 @@ type Props = {
   offset: number,
 }
 
-const tt = {
-  padding: "7px",
-}
 
 function Pagination({ setOffset, offset }: Props) {
 
@@ -43,7 +40,7 @@ function Pagination({ setOffset, offset }: Props) {
       <Row className="justify-content-md-center">
         <Col xs="12" sm="11" md="8" lg="6" xl="5" xxl="5">
           <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Previous</Button>
-          <strong style={tt}>You are currently on page:</strong> <span style={tt} className="target-page">{counter}</span>
+          <strong className="current-page-text">You are currently on page:</strong> <span className="target-page current-page-number">{counter}</span>
           <Button disabled={false} className="pag-button" variant="warning" onClick={moveToPage}>Next</Button>
         </Col>
       </Row>

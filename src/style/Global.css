@@ -69,3 +69,33 @@
     font-weight: bold;
     font-size: 1.2rem;
 }
+
+/* *--------LOADING PAGE------------ */
+.loadingContainer {
+    margin-top: 6%;
+}
+
+.spinnerStyle {
+    width: 125px;
+    height: 125px;
+}
+
+
+/* *--------PAGINATION--------------- */
+.current-page-text {
+    padding: 7px;
+}
+
+.current-page-number {
+    padding-right: 7px;
+}
+
+/* *-------ERROR PAGE----------------- */
+#nothing-to-see {
+    width: 650px;
+    object-fit: fill;
+}
+
+#take-me-home-link {
+    margin: 20px;
+}

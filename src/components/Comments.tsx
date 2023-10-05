@@ -64,7 +64,6 @@ function Comments({ recipeId }: Props) {
                 {comments && comments.map((comment, idx) => {
                     return <Comment key={idx} comment={comment} />
                 })}
-                {/* {comments?.length==0 ? <p>Be the first person to comment this recipe!</p> : <p>Add a new comment:</p> } */}
 
                 <FloatingLabel controlId="comment-textarea" label="Leave a comment here">
                     <Form.Control
