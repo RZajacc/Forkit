@@ -60,8 +60,7 @@ function RecipesList({ searchObj, offset, setOffset }: Props) {
     const dietType = searchObj.dietType != '' ? `&diet=${searchObj.dietType}` : '';
 
     // * Prepare link
-    const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
-    // const apiKey = "df7b0368786144ddad91486133f4e77c";
+    const apiKey = import.meta.env.VITE_SPOONACULARKEY1;
     const number = 6;
     const baseUrl = `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&number=${number}&offset=${offset}&addRecipeInformation=true&fillIngredients=true`;
 
