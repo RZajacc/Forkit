@@ -40,5 +40,7 @@ List of things that requires attention after deployment:
 - [ ] User authentication with Google/Github/Facebook, popup doesn't open
 - [ ] After refreshing the page, or moving to a wrong path, instead of my error page, netlify error is displayed...:unamused:
 
+If you want to take a look visit take a look [here](https://forkitorleaveit.netlify.app/)
+
 > [!NOTE]
 > Main goal of the project is learning to code, so any tips are welcome!
