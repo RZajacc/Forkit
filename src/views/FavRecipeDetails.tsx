@@ -7,7 +7,7 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { addDoc, collection, deleteDoc, doc, onSnapshot, query, where } from "firebase/firestore";
 import { db } from "../config/firebaseConfig";
-
+import "../style/Recipes.css"
 
 function FavRecipeDetails() {
 

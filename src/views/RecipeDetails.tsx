@@ -7,6 +7,7 @@ import { collection, addDoc, query, where, onSnapshot, deleteDoc, doc } from "fi
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { db } from "../config/firebaseConfig";
+import "../style/Recipes.css"
 
 interface LocationState {
   recipe: RecipeGeneral,
@@ -20,29 +21,6 @@ function RecipeDetails() {
   const [favs, setFavs] = useState<userFavs[] | null>(null);
   const [favID, setFavID] = useState<string | null>(null);
 
-
-  // * ------ ELEMENTS STYLES -------------
-  const nutritionStyle = {
-    border: "1px solid black",
-    padding: '3px',
-    borderRadius: '42%',
-  }
-
-  const sectionsStyle = {
-    marginTop: '20px',
-  }
-
-  const containerStyle = {
-    marginBottom: '75px',
-  }
-
-  const star = {
-    width: "25px",
-  }
-
-  const favsButton = {
-    marginLeft: "15px",
-  }
 
   // *Adding recipe to favourites
   const handleAddFavourite = async () => {
@@ -67,7 +45,6 @@ function RecipeDetails() {
   const getFavouritesLive = () => {
     const q = query(collection(db, "favourites"), where("userID", "==", user?.uid), where("recipeID", "==", recipe.id));
     onSnapshot(q, (querySnapshot) => {
-      // const comments: commentsType[] = [];
       const favs: userFavs[] = [];
       querySnapshot.forEach((doc) => {
         favs.push(doc.data() as userFavs);
@@ -84,33 +61,33 @@ function RecipeDetails() {
   return (
     <>
       <TopSection />
-      <Container style={containerStyle}>
+      <Container className="containerStyle">
         <h2 className="text-center">{recipe.title}
           {favs?.length != 0 ? (
-            <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" style={star} />
+            <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" className="star" />
               Remove from favourites
             </Button>
           ) : (
-            <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Empty_Star.png?alt=media&token=297da907-8326-4f14-95a7-ecb42c39853c" alt="empty star" style={star} />
+            <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Empty_Star.png?alt=media&token=297da907-8326-4f14-95a7-ecb42c39853c" alt="empty star" className="star" />
               Add to favourites
             </Button>
           )}
         </h2>
 
         <p className="text-center">
-          <b>Health score: </b><span style={nutritionStyle}>{recipe.healthScore}</span>
-          <b> Ready in (minutes): </b>  <span style={nutritionStyle}>{recipe.readyInMinutes}</span>
-          <b> Servings: </b>  <span style={nutritionStyle}>{recipe.servings}</span>
-          <b> Sustainable: </b>  <span style={nutritionStyle}>{recipe.sustainable ? 'Yes' : 'No'}</span>
+          <b>Health score: </b><span className="nutritionStyle">{recipe.healthScore}</span>
+          <b> Ready in (minutes): </b>  <span className="nutritionStyle">{recipe.readyInMinutes}</span>
+          <b> Servings: </b>  <span className="nutritionStyle">{recipe.servings}</span>
+          <b> Sustainable: </b>  <span className="nutritionStyle">{recipe.sustainable ? 'Yes' : 'No'}</span>
         </p>
 
         <div className="text-center">
           <img src={recipe.image} width={"450px"} />
         </div>
 
-        <h4 className="text-center" style={sectionsStyle}>Ingredient list:</h4>
+        <h4 className="text-center sectionsStyle">Ingredient list:</h4>
         <ul>
           {recipe.extendedIngredients.map((ingredient, indRec) => {
             return (
@@ -119,7 +96,7 @@ function RecipeDetails() {
           })}
         </ul>
 
-        <h4 className="text-center" style={sectionsStyle}>Instructions: </h4>
+        <h4 className="text-center sectionsStyle">Instructions: </h4>
         <ol>
           {recipe.analyzedInstructions[0].steps.map((step, idx) => {
             return <li key={idx}>{step.step}</li>
