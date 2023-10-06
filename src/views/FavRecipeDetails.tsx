@@ -90,7 +90,7 @@ function FavRecipeDetails() {
             </Button>
           ) : (
             <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Empty_Star.png" alt="empty star" className="star" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Empty_Star.png?alt=media&token=297da907-8326-4f14-95a7-ecb42c39853c" alt="empty star" className="star" />
               Add to favourites
             </Button>
           )}

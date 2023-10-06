@@ -16,7 +16,7 @@ function ErrorPage() {
                     <Col xs={6}>
                         <h3 className="text-center">The page you're trying to access doesnt exist!</h3>
                         <p className="text-center">{error.error.message}</p>
-                        <img src="nothing.jpg" id="nothing-to-see" />
+                        <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/nothing.jpg?alt=media&token=7e5eaad7-69e1-4b0f-bd94-83b21f2ea986" id="nothing-to-see" />
                         <div className="text-center">
                             <LinkContainer to={"/"}>
                                 <a className="btn btn-success" role="button" id="take-me-home-link">Take me to home!</a>

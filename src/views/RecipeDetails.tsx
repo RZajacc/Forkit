@@ -88,12 +88,12 @@ function RecipeDetails() {
         <h2 className="text-center">{recipe.title}
           {favs?.length != 0 ? (
             <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Full_Star.png" alt="empty star" style={star} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" style={star} />
               Add to favourites
             </Button>
           ) : (
             <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Empty_Star.png" alt="empty star" style={star} />
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Empty_Star.png?alt=media&token=297da907-8326-4f14-95a7-ecb42c39853c" alt="empty star" style={star} />
               Add to favourites
             </Button>
           )}

@@ -12,7 +12,7 @@ function AppNav() {
         <LinkContainer to={'/'}>
           <Navbar.Brand>
             <img
-              src='../public/hungry.svg'
+              src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/hungry.svg?alt=media&token=a0bc267d-5ae9-42ba-b93e-9fc4d216eb51'
               width='40'
               height='40'
               className='d-inline-block align-top'

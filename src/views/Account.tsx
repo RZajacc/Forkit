@@ -115,16 +115,16 @@ function Account() {
             <div className="otherLoggingOptions">
               <h5 className='text-center'>Or select one of alternative logging options:</h5>
               <Button variant='light' onClick={handleLoginGoogle} className="loginButtonStyle">
-                <img src='public\googleIcon.svg' /> Log in with Google
+                <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/googleIcon.svg?alt=media&token=acf1418a-c215-4ecc-87d8-e0f5e6ea051a' /> Log in with Google
               </Button>
 
               <Button variant='light' onClick={handleGithubLogin} className="loginButtonStyle">
-                <img src='public/github.png' width={'45px'} />
+                <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/github.png?alt=media&token=4f7440c9-6b84-4434-80d2-970c13a0301b' width={'45px'} />
                 Login in with Github
               </Button>
 
               <Button variant='light' onClick={handleFacebookLogin} className="loginButtonStyle">
-                <img src='public/facebook.png' width={'45px'} />
+                <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/facebook.png?alt=media&token=011fb176-e357-48df-a263-cb03e4ebabc6' width={'45px'} />
                 Login in with Facebook
               </Button>
             </div>
