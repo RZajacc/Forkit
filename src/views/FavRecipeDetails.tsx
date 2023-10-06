@@ -22,8 +22,7 @@ function FavRecipeDetails() {
   const fetchSingleRecipe = async () => {
 
     // * Prepare link
-    const apiKey = '72af2c7b661040b7a5f1bc928fa61a0e';
-    // const apiKey = "df7b0368786144ddad91486133f4e77c";
+    const apiKey = import.meta.env.VITE_SPOONACULARKEY;
     const url = `https://api.spoonacular.com/recipes/${recipeID}/information?apiKey=${apiKey}`;
 
     try {
@@ -86,7 +85,7 @@ function FavRecipeDetails() {
           {favs?.length != 0 ? (
             <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
               <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" className="star" />
-              Add to favourites
+              Remove from favourites
             </Button>
           ) : (
             <Button className="favsButton" variant="info" onClick={handleAddFavourite}>

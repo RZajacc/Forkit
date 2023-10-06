@@ -89,7 +89,7 @@ function RecipeDetails() {
           {favs?.length != 0 ? (
             <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
               <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" style={star} />
-              Add to favourites
+              Remove from favourites
             </Button>
           ) : (
             <Button style={favsButton} variant="info" onClick={handleAddFavourite}>
