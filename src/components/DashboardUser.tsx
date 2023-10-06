@@ -9,7 +9,7 @@ function DashboardUser() {
 
   return (
     <>
-      <Row className="justify-content-md-center dashboard-content">
+      <Row className="justify-content-md-center dashboard-content" xs={10}>
         {user?.photoURL ?
           <img src={user?.photoURL} className="dashboard-profile-pic" />
           :
@@ -17,7 +17,7 @@ function DashboardUser() {
         }
       </Row>
 
-      <Row className="dashboard-bottom-content">
+      <Row className="dashboard-bottom-content" xs={10}>
         <p><strong>User name: </strong> {user!.displayName ? user!.displayName : "No user name assigned"}</p>
         <p><strong>Email: </strong> {(user!.email || user?.providerData[0].email) || "Data not available"}</p>
         <p><strong>Active since: </strong> {user ? user.metadata.creationTime : "No data"}</p>

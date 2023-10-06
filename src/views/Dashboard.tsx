@@ -27,8 +27,7 @@ function Dashboard() {
           </Col>
         </Row>
         {displayToggle ? <DashboardUser /> : <DashboardFavs />}
-
-      </Container>
+      </Container >
     </>
   )
 }

@@ -88,7 +88,6 @@ function Account() {
       <TopSection />
       <Container className='account-container'>
         <Row className='justify-content-md-center'>
-          {/* <Col xs lg='4' className="colStyle"> */}
           <Col xxl='4' xl='5' lg='5' md='10' sm='10' xs='10' className="colStyle">
             <Form onSubmit={handleLogin} className='text-center'>
               <h5>If you already have an account simply log in using preferred option:</h5>
@@ -131,7 +130,6 @@ function Account() {
             </div>
           </Col>
 
-          {/* <Col xs lg='4' className="colStyle">  */}
           <Col xxl='4' xl='5' lg='5' md='10' sm='10' xs='10' className="colStyle">
             <Form onSubmit={handleRegister} className='text-center'>
               <h5>If you don't have an account yet please use this register form:</h5>
