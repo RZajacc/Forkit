@@ -29,16 +29,15 @@
     margin: 0 auto;
 }
 
-.dashboard-nouser-pic {
-    width: 175px;
-    border-radius: 50%;
-}
-
 .dashboard-button {
     width: 100%;
 }
 
 /* *Dashboard favourites*/
+.favs-container {
+    margin-bottom: 5%;
+}
+
 .noFavsText {
     margin-bottom: 40px;
 }

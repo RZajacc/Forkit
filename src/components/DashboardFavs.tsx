@@ -32,13 +32,13 @@ function DashboardFavs() {
 
     return (
         <>
-            <Container>
+            <Container className="favs-container">
                 <Row className="justify-content-md-center" >
                     <Col xs lg="5">
                         {userFavs?.length == 0 ? <h4 className="noFavsText">...No favourites yet...</h4> : ''}
                     </Col>
                 </Row>
-                <Row xs={2} md={4} className="g-4">
+                <Row xxl={6} xl={5} lg={4} md={3} sm={2} xs={1} className="g-4">
                     {userFavs && userFavs.map((recipe) => {
                         return <RecipeCardDashboard recipe={recipe} key={recipe.recipeID} />
                     })}
