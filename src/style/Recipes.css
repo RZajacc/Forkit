@@ -4,6 +4,7 @@
 }
 
 .linkStyle {
+    font-size: 1.0rem;
     text-decoration: none;
     color: white;
     background-color: #6FC643;
@@ -14,6 +15,25 @@
 .cardStyle {
     margin-bottom: 15px;
 }
+
+/* *--------FAV-RECIPE CARD------------ */
+.fav-cardTitle {
+    font-size: 0.8rem;
+}
+
+.fav-linkStyle {
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: white;
+    background-color: #6FC643;
+    border-radius: 3%;
+    padding: 5px;
+}
+
+.fav-cardStyle {
+    margin-bottom: 20px;
+}
+
 
 /* * -------FAVOURITE RECIPE ---------------- */
  .nutritionStyle {

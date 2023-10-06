@@ -85,7 +85,7 @@ function FavRecipeDetails() {
         <h2 className="text-center">{recipeData?.title}
           {favs?.length != 0 ? (
             <Button className="favsButton" variant="info" onClick={handleAddFavourite}>
-              <img src="../public/Full_Star.png" alt="empty star" className="star" />
+              <img src="https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/Full_Star.png?alt=media&token=cd7054c0-b436-4a17-a80d-95b0a8b0b951" alt="empty star" className="star" />
               Add to favourites
             </Button>
           ) : (

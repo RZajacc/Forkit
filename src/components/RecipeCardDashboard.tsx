@@ -10,11 +10,11 @@ type Props = {
 function RecipeCardDashboard({ recipe }: Props) {
   return (
     <Col key={recipe.recipeID}>
-      <Card className="cardStyle">
+      <Card className="fav-cardStyle">
         <Card.Img variant="top" src={recipe.ImageUrl} />
         <Card.Body className="text-center">
-          <Card.Title className="cardTitle">{recipe.recipeTitle}</Card.Title>
-          <Link to={`${recipe.recipeID}`} className="linkStyle">See more details</Link>
+          <Card.Title className="fav-cardTitle">{recipe.recipeTitle}</Card.Title>
+          <Link to={`${recipe.recipeID}`} className="fav-linkStyle">See more details</Link>
         </Card.Body>
       </Card>
     </Col>

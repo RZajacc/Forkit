@@ -4,6 +4,7 @@ import "../style/Global.css";
 
 
 function Contact() {
+
   return (
     <>
       <TopSection />
@@ -12,7 +13,7 @@ function Contact() {
           <Col xs lg="7">
             <h1>Contact us</h1>
             <p>You can reach us by phone, mail or just come to visit!</p>
-            <p><a href="mailto:rev@gmail.com">&#x2709; rev@gmail.com</a></p>
+            <p><a href="mailto:rf.zajac@gmail.com" className="contact-link">&#x2709; Contact me</a></p>
             <p>&#x2706; +49 123 4567 8912</p>
             <p><strong>Adress: </strong>Erich-Weinert-Straße 145, 10409 Berlin</p>
 

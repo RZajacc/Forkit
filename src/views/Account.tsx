@@ -86,7 +86,7 @@ function Account() {
   return (
     <>
       <TopSection />
-      <Container>
+      <Container className='account-container'>
         <Row className='justify-content-md-center'>
           <Col xs lg='4' className="colStyle">
             <Form onSubmit={handleLogin} className='text-center'>
