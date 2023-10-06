@@ -1,6 +1,7 @@
-#Fork It
+# Fork It
 
-###Description
+### Description
+
 Project is using [Spoonacular](https://spoonacular.com/) API to browse recipies from different cuisines, and dish types.
 
 As an unregistered user you can see recipes cards, and make queries to a database to display more, hovewer if you want to see recipes details you need to register or login to your account.
@@ -30,7 +31,7 @@ Back-end part of the project is created with the use of [Firebase](https://fireb
  VITE_SPOONACULARKEY = ...your credentials...
 ```
 
-###Watch it live
+### Watch it live
 
 Project is deployed on Nettlify. Since it's my first attempt to do so, not everything is working like its supposed to be but I'm working on improvements.
 
