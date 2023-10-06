@@ -16,6 +16,11 @@
     font-weight: bold;
 }
 
+.nav-button-image {
+    width: 20px
+}
+
+
 /* *-------FOOTER------------ */
 #footer {
     /* margin-top: 50px; */

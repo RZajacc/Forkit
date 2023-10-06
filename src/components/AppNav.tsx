@@ -2,12 +2,13 @@ import { useContext } from 'react';
 import { Container, Navbar, Nav, NavLink, Button } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { AuthContext } from '../context/AuthContext';
+import "../style/Global.css";
 
 function AppNav() {
   const { user, logout } = useContext(AuthContext);
 
   return (
-    <Navbar expand='lg' className='p-3'>
+    <Navbar expand='sm' className='p-3'>
       <Container fluid>
         <LinkContainer to={'/'}>
           <Navbar.Brand>
@@ -38,7 +39,7 @@ function AppNav() {
                 </LinkContainer>
                 <LinkContainer to={'account'}>
                   <Button variant='danger' onClick={logout}>
-                    <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/door-open-white.svg?alt=media&token=02cc62e2-e221-46ba-acfe-9ce5e156a510' alt='opened door' width='25px' />{' '}
+                    <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/door-open-white.svg?alt=media&token=02cc62e2-e221-46ba-acfe-9ce5e156a510' alt='opened door' className='nav-button-image' />{' '}
                     Logout
                   </Button>
                 </LinkContainer>
@@ -46,7 +47,7 @@ function AppNav() {
             ) : (
               <LinkContainer to={'account'}>
                 <NavLink>
-                  <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/account-50-black.png?alt=media&token=07ba0644-e81a-4f25-8166-a4d0d6c7a799' width='25px' /> Account
+                  <img src='https://firebasestorage.googleapis.com/v0/b/forkit-d574f.appspot.com/o/account-50-black.png?alt=media&token=07ba0644-e81a-4f25-8166-a4d0d6c7a799' className='nav-button-image' /> Account
                 </NavLink>
               </LinkContainer>
             )}
