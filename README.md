@@ -2,9 +2,9 @@
 
 ### Version information
 
-*This is the initial version of the project. It is built with React+Vite, Typescript, Bootstrap and Firebase serving as a backend*
+*This is the initial version of the project. It is built with React+Vite, Typescript, Bootstrap and Firebase serving as a backend.*
 
-*Current and complete version of the project is available [here](https://github.com/RZajacc/ForkIt_2.0)*
+*Current and complete version of the project is available [here](https://github.com/RZajacc/ForkIt_2.0).*
 
 ### Description
 
